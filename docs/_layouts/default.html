@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: "ja-jp" }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,32 +18,39 @@
       <header>
         <h1 class="header">{{ site.title | default: site.github.repository_name }}</h1>
 
-        <p>
-          ・<a href="index.html">トップページ</a><br />
-          ・<a href="戦略.html">戦略</a><br />
-          ・<a href="兵種.html">兵種</a><br />
-          異次元銀河<br />
-          &nbsp;&nbsp;・<a href="リーフ32.html">リーフ32</a><br />
-          &nbsp;&nbsp;・<a href="フォーマルハウト.html">フォーマルハウト</a><br />
-          &nbsp;&nbsp;・<a href="超重力宙域H1.html">超重力宙域H1</a><br />
-          &nbsp;&nbsp;・<a href="ポルックスα.html">ポルックスα</a><br />
-          &nbsp;&nbsp;・<a href="ディアスポラ回廊.html">ディアスポラ回廊</a><br />
-          &nbsp;&nbsp;・<a href="統合軍88艦隊.html">統合軍88艦隊</a><br />
-          &nbsp;&nbsp;・<a href="金星.html">金星</a><br />
-          &nbsp;&nbsp;・<a href="幻主星.html">幻主星</a><br />
-          &nbsp;&nbsp;・<a href="サルガッソー宙域.html">サルガッソー宙域</a><br />
-          &nbsp;&nbsp;・<a href="水星.html">水星</a><br />
-          &nbsp;&nbsp;・<a href="カノープス.html">カノープス</a><br />
-          &nbsp;&nbsp;・<a href="ベルセルク.html">ベルセルク</a><br />
-          データ<br />
-          &nbsp;&nbsp;・<a href="バグ.html">バグ</a><br />
-          &nbsp;&nbsp;・<a href="その他.html">その他</a><br />
-        </p>
-
         <ul>
           <li><a class="buttons github" href="{{ site.github.repository_url }}">View On GitHub</a></li>
         </ul>
       </header>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">トップページ</a></li>
+          <li><a href="戦略.html">戦略</a></li>
+          <li><a href="兵種.html">兵種</a></li>
+        </ul>
+        <p>異次元銀河</p>
+        <ul>
+          <li><a href="リーフ32.html">リーフ32</a></li>
+          <li><a href="フォーマルハウト.html">フォーマルハウト</a></li>
+          <li><a href="超重力宙域H1.html">超重力宙域H1</a></li>
+          <li><a href="ポルックスα.html">ポルックスα</a></li>
+          <li><a href="ディアスポラ回廊.html">ディアスポラ回廊</a></li>
+          <li><a href="統合軍88艦隊.html">統合軍88艦隊</a></li>
+          <li><a href="金星.html">金星</a></li>
+          <li><a href="幻主星.html">幻主星</a></li>
+          <li><a href="サルガッソー宙域.html">サルガッソー宙域</a></li>
+          <li><a href="水星.html">水星</a></li>
+          <li><a href="カノープス.html">カノープス</a></li>
+          <li><a href="ベルセルク.html">ベルセルク</a></li>
+        </ul>
+        <p>データ</p>
+        <ul>
+          <li><a href="バグ.html">バグ</a></li>
+          <li><a href="その他.html">その他</a></li>
+        </ul>
+        </p>
+      </nav>
 
       <section>
         {{ content }}
