@@ -182,8 +182,7 @@ p img, .emoji
 
 code, pre
 {
-	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-	color:#000;
+	font-family: monospace;
 	font-size:14px;
 }
 
@@ -210,7 +209,7 @@ table
 	border: 1px solid #ccc;
 	margin-bottom: 32px;
 	text-align: left;
- }
+}
 
 th
 {
@@ -219,13 +218,13 @@ th
 	padding: 10px;
 	background: #232323;
 	color: #FDFEFB;
- }
+}
 
 td
 {
 	padding: 10px;
-	background: #ccc;
- }
+	background: #393a39;
+}
 
 
 /* Wrapper */
