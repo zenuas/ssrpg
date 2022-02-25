@@ -27,7 +27,7 @@ time, mark, audio, video
 
 body
 {
-	padding: 10px 50px 0 0;
+	padding: 10px 0 0 0;
 	background-color: #1C1C1B;
 	color: #CCC7B6;
 	margin: 0;
@@ -151,7 +151,7 @@ dl p
 hr
 {
 	border: 0;
-	background: #ccc;
+	background: #414241;
 	height: 1px;
 	margin: 0 0 24px;
 }
@@ -206,7 +206,7 @@ table
 
 table
 {
-	border: 1px solid #ccc;
+	border: 1px solid #414241;
 	margin-bottom: 32px;
 	text-align: left;
 }
@@ -250,7 +250,7 @@ td
 
 header
 {
-	border: 1px solid #000;
+	border: 1px solid #7c7468;
 	padding: 34px 25px 22px 20px;
 	margin: 20px 0 0 0;
 	-webkit-font-smoothing: antialiased;
