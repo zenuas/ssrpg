@@ -16,7 +16,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1 class="header">{{ site.title | default: site.github.repository_name }}</h1>
+        <h1 class="header"><a href="{{ site.github.url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
 
         <ul>
           <li><a class="buttons github" href="{{ site.github.repository_url }}">View On GitHub</a></li>
