@@ -1,3 +1,6 @@
 title: 宇宙戦艦物語RPG攻略メモ
 description: 真破攻略メモ
 theme: jekyll-theme-dinky
+markdown: kramdown
+kramdown:
+  hard_wrap: true
