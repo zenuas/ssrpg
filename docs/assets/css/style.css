@@ -122,9 +122,10 @@ ol
 
 blockquote
 {
+	color: #958f83;
 	margin: 0;
 	padding: 0 0 0 20px;
-	font-style: italic;
+	border-left: 0.25em solid #3e3f3e;
 }
 
 dl, dt, dd, dl p
@@ -468,7 +469,8 @@ footer
 		margin: 0 0 0 20px;
 	}
 
-	footer a{
+	footer a
+	{
 		display: block;
 	}
 
