@@ -52,7 +52,7 @@ h1, h2, h3
 	font-weight: normal;
 }
 
-h1,h2, h3
+h1, h2, h3
 {
 	display: block;
 	border-bottom: 1px solid #ccc;
@@ -192,12 +192,12 @@ code, pre
 pre
 {
 	padding: 4px 12px;
-	background-color: #2f302e;
 	border-radius: 4px;
 	border: 1px solid #404140;
 	overflow: auto;
 	overflow-y: hidden;
 	margin-bottom: 32px;
+	white-space: pre-wrap;
 }
 
 
@@ -240,6 +240,15 @@ td
 	display: flex;
 }
 
+@media only screen and (min-width: 1025px)
+{
+	nav
+	{
+		min-width: 10.0em;
+		max-width: 15.0em;
+	}
+}
+
 @media only screen and (max-width: 1024px)
 {
 	.flexbox
@@ -253,7 +262,8 @@ td
 
 header
 {
-	border: 1px solid #7c7468;
+	border-top: 1px solid #7c7468;
+	border-bottom: 1px solid #7c7468;
 	padding: 34px 25px 22px 20px;
 	margin: 20px 0 0 0;
 	-webkit-font-smoothing: antialiased;
@@ -315,8 +325,8 @@ header li
 	border-radius: 4px;
 	border: 1px solid #0D0D0D;
 
-	-webkit-box-shadow: inset 0px 1px 1px 0 rgba(233,2,38, 1);
-	box-shadow: inset 0px 1px 1px 0 rgba(233,2,38, 1);
+	-webkit-box-shadow: inset 0px 1px 1px 0 rgba(233, 2, 38, 1);
+	box-shadow: inset 0px 1px 1px 0 rgba(233, 2, 38, 1);
 
 }
 
@@ -354,9 +364,9 @@ a.buttons:hover
 
 
 /* Navigation */
+
 nav
 {
-	width: 300px;
 	padding: 34px 25px 22px 20px;
 	-webkit-font-smoothing: antialiased;
 }
@@ -378,110 +388,4 @@ footer
 	position: fixed;
 	bottom: 10px;
 	padding-left: 50px;
-}
-
-@media print, screen and (max-width: 960px)
-{
-	div.wrapper
-	{
-		width: auto;
-		margin: 0;
-	}
-
-	header, section, footer
-	{
-		float: none;
-		position: static;
-		width: auto;
-	}
-
-	footer
-	{
-		border-top: 1px solid #ccc;
-		margin: 0 84px 0 50px;
-		padding: 0;
-	}
-
-	header
-	{
-		padding-right: 320px;
-	}
-
-	section
-	{
-		padding: 20px 84px 20px 50px;
-		margin: 0 0 20px;
-	}
-
-	header a small
-	{
-		display: inline;
-	}
-
-	header ul
-	{
-		position: absolute;
-		right: 130px;
-		top: 84px;
-	}
-}
-
-@media print, screen and (max-width: 720px)
-{
-	body
-	{
-		word-wrap: break-word;
-	}
-
-	header
-	{
-		padding: 10px 20px 0;
-		margin-right: 0;
-	}
-
-	section
-	{
-		padding: 10px 0 10px 20px;
-		margin: 0 0 30px;
-	}
-
-	footer
-	{
-		margin: 0 0 0 30px;
-	}
-
-	header ul, header p.view
-	{
-		position: static;
-	}
-}
-
-@media print, screen and (max-width: 480px)
-{
-
-	header ul li.download
-	{
-		display: none;
-	}
-
-	footer
-	{
-		margin: 0 0 0 20px;
-	}
-
-	footer a
-	{
-		display: block;
-	}
-
-}
-
-@media print
-{
-	body
-	{
-		padding: 0.4in;
-		font-size: 12pt;
-		color: #444;
-	}
 }
