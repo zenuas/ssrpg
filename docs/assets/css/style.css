@@ -303,14 +303,15 @@ header ul
 {
 	list-style: none;
 	padding: 0;
+	display: flex;
 }
 
 header li
 {
 	list-style-type: none;
-	width: 150px;
 	height: 15px;
 	margin-bottom: 12px;
+	margin-right: 6px;
 	line-height: 1em;
 	padding: 6px 6px 6px 7px;
 
