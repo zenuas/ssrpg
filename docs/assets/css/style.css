@@ -283,7 +283,6 @@ h1.header
 	margin-top: 0;
 }
 
-
 h1.header, a.header, a.name, header a
 {
 	color: #fff;
@@ -304,9 +303,10 @@ header ul
 	list-style: none;
 	padding: 0;
 	display: flex;
+	flex-wrap: wrap;
 }
 
-header li
+.buttons
 {
 	list-style-type: none;
 	height: 15px;
@@ -328,10 +328,9 @@ header li
 
 	-webkit-box-shadow: inset 0px 1px 1px 0 rgba(233, 2, 38, 1);
 	box-shadow: inset 0px 1px 1px 0 rgba(233, 2, 38, 1);
-
 }
 
-header li:hover
+.buttons:hover
 {
 	background: #C3001D;
 	background: -moz-linear-gradient(top, #C3001D 0%, #950119 100%);
@@ -342,13 +341,19 @@ header li:hover
 	background: linear-gradient(to top, #C3001D 0%,#950119 100%);
 }
 
-a.buttons
+.box
 {
 	-webkit-font-smoothing: antialiased;
 	font-weight: normal;
 	text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
 	padding: 2px 2px 2px 2px;
 	height: 30px;
+}
+
+a.box:hover
+{
+	color: #fff;
+	text-decoration: none;
 }
 
 a.document
@@ -375,10 +380,16 @@ a.github
 	padding-left: 22px;
 }
 
-a.buttons:hover
+input.search
 {
-	color: #fff;
-	text-decoration: none;
+	text-indent: -1000px;
+	background: #AF0011 url(../images/search.png) no-repeat left 3px center;
+	padding-left: 23px;
+}
+
+input.search:hover
+{
+	background: #C3001D url(../images/search.png) no-repeat left 3px center;
 }
 
 
