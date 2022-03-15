@@ -10,7 +10,7 @@ function table_col_visible(table, cols)
 }
 
 $(window).on('load', function () {
-	const list  = $("#visible_list")[0];
+	const list  = $("#visible-list").attr("class", "commands")[0];
 	const table = list.nextSibling.nextSibling;
 	table_col_visible(table, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 	
@@ -27,14 +27,14 @@ $(window).on('load', function () {
 	opts
 		.map((opt) => {
 			const v = $("<span>" + (opt.visible ? "非表示" : "表示") + "</span>")[0];
-			const a = $("<a href='javascript:void(0)'>" + opt.name + "</a>")[0];
+			const a = $("<a href='javascript:void(0)' class='box'>" + opt.name + "</a>")[0];
 			a.append(v);
 			a.onclick = () => {
 				table_col_visible(table, opt.columns);
 				opt.visible = !opt.visible;
 				$(v).text(opt.visible ? "非表示" : "表示");
 			};
-			return $("<li></li>").append(a);
+			return $("<li class='buttons'></li>").append(a);
 		})
 		.forEach((x) => x.appendTo(list));
 });

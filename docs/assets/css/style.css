@@ -298,7 +298,7 @@ a.name
 	white-space: nowrap;
 }
 
-header ul
+ul.commands
 {
 	list-style: none;
 	padding: 0;
@@ -343,6 +343,7 @@ header ul
 
 .box
 {
+	color: #fff;
 	-webkit-font-smoothing: antialiased;
 	font-weight: normal;
 	text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
