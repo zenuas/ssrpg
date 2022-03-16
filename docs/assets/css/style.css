@@ -229,12 +229,8 @@ td
 }
 
 
-/* Wrapper */
-.wrapper
-{
-}
-
-.flexbox
+/* Main Contents */
+.main-contents
 {
 	display: flex;
 }
@@ -250,7 +246,7 @@ td
 
 @media only screen and (max-width: 1024px)
 {
-	.flexbox
+	.main-contents
 	{
 		flex-direction: column-reverse;
 	}
