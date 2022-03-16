@@ -32,7 +32,6 @@ body
 	color: #CCC7B6;
 	margin: 0;
 	line-height: 1.8em;
-	-webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6
@@ -266,7 +265,6 @@ header
 	border-bottom: 1px solid #7c7468;
 	padding: 34px 25px 22px 20px;
 	margin: 20px 0 0 0;
-	-webkit-font-smoothing: antialiased;
 }
 
 header h1, header h1 a
@@ -297,35 +295,23 @@ header h1, header h1 a
 	padding: 6px 6px 6px 7px;
 
 	background: #AF0011;
-	background: -moz-linear-gradient(top, #AF0011 0%, #820011 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#dddddd));
-	background: -webkit-linear-gradient(top, #AF0011 0%,#820011 100%);
-	background: -o-linear-gradient(top, #AF0011 0%,#820011 100%);
-	background: -ms-linear-gradient(top, #AF0011 0%,#820011 100%);
 	background: linear-gradient(to top, #AF0011 0%,#820011 100%);
 
 	border-radius: 4px;
 	border: 1px solid #0D0D0D;
 
-	-webkit-box-shadow: inset 0px 1px 1px 0 rgba(233, 2, 38, 1);
 	box-shadow: inset 0px 1px 1px 0 rgba(233, 2, 38, 1);
 }
 
 .buttons:hover
 {
 	background: #C3001D;
-	background: -moz-linear-gradient(top, #C3001D 0%, #950119 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#dddddd));
-	background: -webkit-linear-gradient(top, #C3001D 0%,#950119 100%);
-	background: -o-linear-gradient(top, #C3001D 0%,#950119 100%);
-	background: -ms-linear-gradient(top, #C3001D 0%,#950119 100%);
 	background: linear-gradient(to top, #C3001D 0%,#950119 100%);
 }
 
 .box
 {
 	color: #fff;
-	-webkit-font-smoothing: antialiased;
 	font-weight: normal;
 	text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
 	padding: 2px 2px 2px 2px;
@@ -380,7 +366,6 @@ input.search:hover
 nav
 {
 	padding: 34px 25px 22px 20px;
-	-webkit-font-smoothing: antialiased;
 }
 
 /* Section - for main page content */
