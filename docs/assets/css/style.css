@@ -269,13 +269,9 @@ header
 	-webkit-font-smoothing: antialiased;
 }
 
-p.header
+header h1, header h1 a
 {
-	font-size: 16px;
-}
-
-h1.header
-{
+	color: #CCC7B6;
 	font-size: 30px;
 	font-weight: 300;
 	line-height: 1.3em;
@@ -283,22 +279,7 @@ h1.header
 	margin-top: 0;
 }
 
-h1.header, a.header, a.name, header a
-{
-	color: #fff;
-}
-
-a.header
-{
-	text-decoration: underline;
-}
-
-a.name
-{
-	white-space: nowrap;
-}
-
-ul.commands
+.commands
 {
 	list-style: none;
 	padding: 0;
