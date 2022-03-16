@@ -54,7 +54,7 @@ h1, h2, h3
 h1, h2, h3
 {
 	display: block;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #CCCCCC;
 	padding-bottom: 5px;
 }
 
@@ -121,10 +121,10 @@ ol
 
 blockquote
 {
-	color: #958f83;
+	color: #958F83;
 	margin: 0;
 	padding: 0 0 0 20px;
-	border-left: 0.25em solid #3e3f3e;
+	border-left: 0.25em solid #3E3F3E;
 }
 
 dl, dt, dd, dl p
@@ -165,7 +165,7 @@ img
 	max-width: 650px;
 	padding: 5px;
 	margin: 10px 0 32px 0;
-	border: 1px solid #ccc;
+	border: 1px solid #CCCCCC;
 }
 
 p img, .emoji
@@ -185,7 +185,7 @@ code, pre
 	font-family: monospace;
 	font-size: 14px;
 	background-color: #333837;
-	color: #b9b4a9;
+	color: #B9B4A9;
 }
 
 pre
@@ -225,7 +225,7 @@ th
 td
 {
 	padding: 10px;
-	background: #393a39;
+	background: #393A39;
 }
 
 
@@ -261,8 +261,8 @@ td
 
 header
 {
-	border-top: 1px solid #7c7468;
-	border-bottom: 1px solid #7c7468;
+	border-top: 1px solid #7C7468;
+	border-bottom: 1px solid #7C7468;
 	padding: 34px 25px 22px 20px;
 	margin: 20px 0 0 0;
 }
@@ -311,7 +311,7 @@ header h1, header h1 a
 
 .box
 {
-	color: #fff;
+	color: #FFFFFF;
 	font-weight: normal;
 	text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
 	padding: 2px 2px 2px 2px;
@@ -320,7 +320,7 @@ header h1, header h1 a
 
 a.box:hover
 {
-	color: #fff;
+	color: #FFFFFF;
 	text-decoration: none;
 }
 
