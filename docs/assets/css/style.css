@@ -239,10 +239,10 @@ td
 		justify-content: start;
 	}
 	
-	nav
+	nav div
 	{
-		min-width: 10.0em;
-		max-width: 15.0em;
+		top: 20px;
+		position: sticky;
 	}
 }
 
