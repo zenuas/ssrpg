@@ -216,6 +216,7 @@ td
 
 
 /* Form */
+
 input
 {
 	border-radius: 0.7em;
@@ -224,6 +225,7 @@ input
 
 
 /* Main Contents */
+
 .main-contents
 {
 	display: flex;
