@@ -39,4 +39,20 @@ $(window).on('load', function () {
 			})
 			.forEach((x) => x.appendTo(list));
 	});
+	
+	$("details[id^=details-cookie-]").each((index, xdetails) => {
+		const details = $(xdetails);
+		const id = xdetails.id;
+		
+		const value = $.cookie(id);
+		if(value == "close")
+		{
+			details.removeAttr("open");
+		}
+		
+		details.on("toggle", () => {
+			const opend = details.attr("open") == "open";
+			$.cookie(id, opend ? "open" : "close", { expires: 7 });
+		});
+	});
 });
