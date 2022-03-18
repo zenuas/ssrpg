@@ -13,6 +13,7 @@ $(window).on('load', function () {
 	$(".enemies-list").each((index, list) => {
 		$(list).attr("class", "commands");
 		const table = list.nextSibling.nextSibling;
+		$(table).tablesorter({headers: {12: { sorter: "text" }}});
 		table_col_visible(table, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 		
 		const opts = [
