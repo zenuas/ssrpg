@@ -17,10 +17,10 @@
       <h1><a href="{{ site.github.url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
 
       <ul class="commands">
-        <li class="buttons"><a class="box github" href="{{ site.github.repository_url }}">GitHub</a></li>
-        <li class="buttons"><a class="box document" href="https://raw.githubusercontent.com/{{ site.github.repository_nwo }}/{{ site.github.source.branch }}/docs/{{ page.name }}">ソース</a></li>
-        <li class="buttons"><a class="box history" href="https://github.com/{{ site.github.repository_nwo }}/commits/{{ site.github.source.branch }}/docs/{{ page.name }}">履歴</a></li>
-        <li><form action="https://github.com/{{ site.github.repository_nwo }}/search"><input type="text" name="q" placeholder="検索" required /><input type="submit" class="buttons box search" /></form></li>
+        <li class="buttons"><a class="box github" href="{{ site.github.repository_url }}" target="_blank">GitHub</a></li>
+        <li class="buttons"><a class="box document" href="https://raw.githubusercontent.com/{{ site.github.repository_nwo }}/{{ site.github.source.branch }}/docs/{{ page.name }}" target="_blank">ソース</a></li>
+        <li class="buttons"><a class="box history" href="https://github.com/{{ site.github.repository_nwo }}/commits/{{ site.github.source.branch }}/docs/{{ page.name }}" target="_blank">履歴</a></li>
+        <li><form action="https://github.com/{{ site.github.repository_nwo }}/search" target="_blank"><input type="text" name="q" placeholder="検索" required /><input type="submit" class="buttons box search" /></form></li>
       </ul>
     </header>
 
