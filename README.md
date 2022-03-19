@@ -1,5 +1,4 @@
-# ssrpg
-宇宙戦艦物語RPG攻略メモ
+# 宇宙戦艦物語RPG攻略メモ
 
 参考
 
@@ -12,3 +11,4 @@
 * [jquery-cookie](https://github.com/carhartl/jquery-cookie)
 * [jquery-tablesorter](https://github.com/Mottie/tablesorter)
 * [cdnjs](https://cdnjs.com/)
+* [Tables Generator](https://www.tablesgenerator.com/markdown_tables)
