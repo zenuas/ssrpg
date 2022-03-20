@@ -41,6 +41,8 @@ $(window).on('load', function () {
 			.forEach((x) => x.appendTo(list));
 	});
 	
+	$("table:not(.tablesorter)").tablesorter();
+	
 	$("details[id^=details-cookie-]").each((index, xdetails) => {
 		const details = $(xdetails);
 		const id = xdetails.id;
