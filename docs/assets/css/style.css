@@ -207,6 +207,8 @@ th
 	padding: 0.4em;
 	background: #232323;
 	color: #FDFEFB;
+	top: 0;
+	position: sticky;
 }
 
 td
