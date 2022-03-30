@@ -393,6 +393,26 @@ article
 	padding: 2.0em 1.0em 1.0em 1.0em;
 }
 
+/* Search */
+.search-result blockquote
+{
+	color: inherit;
+	margin: 0;
+	padding: 0 0 0 1.0em;
+	border-left: 0.25em solid #3E3F3E;
+}
+
+.line-number
+{
+	color: #B24E4A;
+}
+
+.search-highlight
+{
+	background-color: #C0C000;
+	color: #B24E4A;
+}
+
 
 /* Footer */
 
