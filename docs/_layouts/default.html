@@ -130,6 +130,11 @@
     </div>
 
     <footer>
+      <address>
+        Posted by <a href="{{ site.github.owner_url }}">@{{ site.github.owner_name }}</a>.<br />
+      </address>
+      Posted at <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: "%Y/%m/%d %T" }}Z</time>.<br />
+      Licensed by {{ site.github.license.name }}.<br />
     </footer>
   </body>
 </html>

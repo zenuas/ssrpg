@@ -394,6 +394,7 @@ article
 }
 
 /* Search */
+
 .search-result blockquote
 {
 	color: inherit;
@@ -418,9 +419,5 @@ article
 
 footer
 {
-	width: 170px;
-	float: left;
-	position: fixed;
-	bottom: 10px;
-	padding-left: 50px;
+	padding-left: 1.0em;
 }
