@@ -79,7 +79,7 @@ $(window).on('load', function () {
 					const name = blob.name.substr(0, blob.name.length - 3);
 					const li = $("<li></li>");
 					const p = $("<p></p>");
-					const a = $("<a></a>").text(name).attr("href", "https://zenuas.github.io/ssrpg/" + name + ".html");
+					const a = $("<a></a>").text(name).attr("href", "https://zenuas.github.io/ssrpg/" + name + ".html#:~:text=" + q);
 					const blockquote = $("<blockquote></blockquote>");
 					
 					$.each(finds, (_, s) => {
