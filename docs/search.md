@@ -1,5 +1,5 @@
 ---
-layout: application
+nonav: true
 ---
 ## 検索結果
 

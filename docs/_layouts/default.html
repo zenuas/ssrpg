@@ -29,6 +29,8 @@
         {{ content }}
       </article>
 
+{% if page.nonav %}
+{% else %}
       <nav>
         <ul>
           <li><a href="index.html">トップページ</a></li>
@@ -127,6 +129,7 @@
           </ul>
         </details>
       </nav>
+{% endif %}
     </div>
 
     <footer>
