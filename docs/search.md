@@ -1,5 +1,6 @@
 ---
 nonav: true
+scripts: ["search.js"]
 ---
 ## 検索結果
 

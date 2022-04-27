@@ -9,6 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
     <script src="{{ '/assets/js/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    {% for scr in page.scripts %}
+    <script src="{{ scr | prepend: '/assets/js/' | append: '?v=' | append: site.github.build_revision | relative_url }}"></script>
+    {% endfor %}
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     {% include head-custom.html %}
   </head>
