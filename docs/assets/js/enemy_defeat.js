@@ -1,3 +1,5 @@
+"use strict";
+
 const labels = [
 '2020/04/08',
 '2020/04/09',
@@ -3050,7 +3052,12 @@ null,
 const config = {
     type: 'line',
     data: data,
-    options: {}
+    options: {
+        elements: {
+            line: { borderWidth: 1 },
+            point: { radius: 0 },
+        },
+    },
 };
 $(window).on('load', function () {
     const chart = new Chart(
