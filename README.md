@@ -14,3 +14,4 @@
 * [Tables Generator](https://www.tablesgenerator.com/markdown_tables)
 * [Text Fragments](https://wicg.github.io/scroll-to-text-fragment/)
 * [Chart.js](https://www.chartjs.org/)
+* [utterances](https://utteranc.es/)
