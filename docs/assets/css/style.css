@@ -342,6 +342,12 @@ a.box:hover
 	text-decoration: none;
 }
 
+a.edit
+{
+	background: url(../images/edit.png) no-repeat left center;
+	padding-left: 22px;
+}
+
 a.document
 {
 	background: url(../images/document.png) no-repeat left center;
