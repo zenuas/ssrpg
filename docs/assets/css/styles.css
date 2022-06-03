@@ -328,6 +328,20 @@ header h1, header h1 a
 	background: linear-gradient(to top, #C3001D 0%,#950119 100%);
 }
 
+.buttons.pushed
+{
+	background: #1F0011;
+	background: linear-gradient(to top, #1F0011 0%,#820011 100%);
+
+	box-shadow: inset 0px 1px 1px 0 rgba(233, 2, 38, 1);
+}
+
+.buttons.pushed:hover
+{
+	background: #33001D;
+	background: linear-gradient(to top, #33001D 0%,#950119 100%);
+}
+
 .box
 {
 	color: #FFFFFF;
