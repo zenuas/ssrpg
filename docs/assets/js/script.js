@@ -14,7 +14,7 @@ $(window).on('load', () => {
 		$(list).attr("class", "commands");
 		const table = list.nextSibling.nextSibling;
 		$(table).tablesorter({headers: {12: { sorter: "text" }}});
-		table_col_visible(table, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
+		table_col_visible(table, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
 		
 		const level_list = $("<ul class='level-list commands'></ul>");
 		$(list).after(level_list);
@@ -23,6 +23,18 @@ $(window).on('load', () => {
 		const calculation_list = $("<ul class='calculation-list commands'></ul>");
 		level_list.after(calculation_list);
 		calculation_list.toggle();
+		const opts_update = () => {
+			if(opts.filter(x => (x.name == "武装威力" || x.name == "装甲" || x.name == "資金功績救出") && x.pushed).length > 0)
+			{
+				level_list.show();
+				calculation_list.show();
+			}
+			else
+			{
+				level_list.hide();
+				calculation_list.hide();
+			}
+		};
 		
 		const opts = [
 			{name: "武装",           pushed: false, columns: [2, 3, 4]},
@@ -35,7 +47,11 @@ $(window).on('load', () => {
 			{name: "カット率",       pushed: false, columns: [19, 20, 21]},
 			{name: "回避率",         pushed: false, columns: [22, 23]},
 			{name: "回復間隔",       pushed: false, columns: [24]},
-			{name: "登場ステージ",   pushed: true,  columns: [25]}
+			{name: "装甲",           pushed: false, columns: [25]},
+			{name: "速度",           pushed: false, columns: [26]},
+			{name: "対火電",         pushed: false, columns: [27, 28]},
+			{name: "資金功績救出",   pushed: false, columns: [29, 30, 31]},
+			{name: "登場ステージ",   pushed: true,  columns: [32]}
 		];
 		
 		opts
@@ -50,11 +66,7 @@ $(window).on('load', () => {
 					v.text(opt.pushed ? "非表示" : "表示");
 					li.removeClass("pushed");
 					if(opt.pushed) li.addClass("pushed");
-					if(opt.name == "武装威力")
-					{
-						level_list.toggle();
-						calculation_list.toggle();
-					}
+					opts_update();
 				};
 				return li;
 			})
@@ -91,23 +103,29 @@ $(window).on('load', () => {
 			{name: "ボス", pushed: !is_solar_systems, boss: true,  func: (a, b, c) => c}
 		];
 		
-		const wepon_power = "tbody tr td:nth-child(5), tbody tr td:nth-child(9), tbody tr td:nth-child(13)";
-		$(table).find(wepon_power).each((_, x) => $(x).attr("xpower", $(x).text() - 0));
+		const change_cols = "tbody tr td:nth-child(5), tbody tr td:nth-child(9), tbody tr td:nth-child(13), tbody tr td:nth-child(25), tbody tr td:nth-child(29), tbody tr td:nth-child(30)";
+		$(table).find(change_cols).each((_, x) => $(x).attr("xvalue", $(x).text() - 0));
 		const power_update = () => {
 			const level = levels.filter(x => x.pushed)[0];
 			const calc  = calculations.filter(x => x.pushed)[0];
 			
-			$(table).find(wepon_power).each((_, x) => {
+			$(table).find(change_cols).each((_, x) => {
 				const td_index = Array.prototype.indexOf.call(x.parentNode.children, x);
-				const weapon   = $(x.parentNode.children[td_index == 4 ? 1 : td_index == 8 ? 2 : 3]).text();
 				const td       = $(x);
-				const boss     = $(x.parentNode.children[25 - 1]).text().indexOf("ボス") >= 0;
-				const power    = td.attr("xpower") - 0;
-				if(power > 0)
+				const value    = td.attr("xvalue") - 0;
+				if(isNaN(value)) return;
+				
+				const boss = $(x.parentNode.children[32 - 1]).text().indexOf("ボス") >= 0;
+				const lv   = calc.func(level.min, level.max, boss ? level.boss : level.max);
+				if(td_index <= 12)
 				{
-					const lv         = calc.func(level.min, level.max, boss ? level.boss : level.max);
+					const weapon     = $(x.parentNode.children[td_index == 4 ? 1 : td_index == 8 ? 2 : 3]).text();
 					const power_plus = weapon.indexOf("Lv補正") >= 0 ? lv : weapon.indexOf("Lv*5補正") >= 0 ? lv * 5 : 0;
-					td.text(Math.floor(power + power_plus + Math.ceil(power * lv / 2)).toLocaleString());
+					td.text(Math.floor(value + power_plus + Math.ceil(value * lv / 2)).toLocaleString());
+				}
+				else
+				{
+					td.text(Math.floor(value + Math.ceil(value * lv / (td_index == 29 - 1 ? 10 : 2))).toLocaleString());
 				}
 			});
 		};
