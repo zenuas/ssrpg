@@ -60,23 +60,6 @@ $(window).on('load', () => {
 			})
 			.forEach(x => x.appendTo(list));
 		
-		const levels = [
-			{name: "一般兵", pushed: true,  min:    0, max:    0, boss:    0},
-			{name: "熟練兵", pushed: false, min:    1, max:   10, boss:   11},
-			{name: "強化兵", pushed: false, min:   11, max:   30, boss:   31},
-			{name: "親衛隊", pushed: false, min:   31, max:  100, boss:  101},
-			{name: "覚醒者", pushed: false, min:  101, max:  998, boss:  999},
-			{name: "光化",   pushed: false, min: 1000, max: 1999, boss: 2000},
-			{name: "真破",   pushed: false, min: 1500, max: 1999, boss: 2000}
-		];
-		
-		const calculations = [
-			{name: "平均", pushed: true,  boss: false, func: (a, b)    => Math.floor((a + b) / 2)},
-			{name: "最小", pushed: false, boss: false, func: (a, b)    => Math.min(a, b)},
-			{name: "最大", pushed: false, boss: false, func: (a, b)    => Math.max(a, b)},
-			{name: "ボス", pushed: false, boss: true,  func: (a, b, c) => c}
-		];
-		
 		const area_name = $("h2:first-child").text();
 		const is_solar_systems = [
 			"月",
@@ -90,6 +73,23 @@ $(window).on('load', () => {
 			"帝国軍太陽系要塞",
 			"帝国軍移民船団"
 		].includes(area_name);
+		
+		const levels = [
+			{name: "一般兵", pushed: true,  min:    0, max:    0, boss:    0},
+			{name: "熟練兵", pushed: false, min:    1, max:   10, boss:   11},
+			{name: "強化兵", pushed: false, min:   11, max:   30, boss:   31},
+			{name: "親衛隊", pushed: false, min:   31, max:  100, boss:  101},
+			{name: "覚醒者", pushed: false, min:  101, max:  998, boss:  999},
+			{name: "光化",   pushed: false, min: 1000, max: 1999, boss: 2000},
+			{name: "真破",   pushed: false, min: 1500, max: 1999, boss: 2000}
+		];
+		
+		const calculations = [
+			{name: "平均", pushed: false,             boss: false, func: (a, b)    => Math.floor((a + b) / 2)},
+			{name: "最小", pushed: false,             boss: false, func: (a, b)    => Math.min(a, b)},
+			{name: "最大", pushed: is_solar_systems,  boss: false, func: (a, b)    => Math.max(a, b)},
+			{name: "ボス", pushed: !is_solar_systems, boss: true,  func: (a, b, c) => c}
+		];
 		
 		const wepon_power = "tbody tr td:nth-child(5), tbody tr td:nth-child(9), tbody tr td:nth-child(13)";
 		$(table).find(wepon_power).each((_, x) => $(x).attr("xpower", $(x).text() - 0));
