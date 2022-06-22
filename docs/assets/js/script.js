@@ -1,12 +1,19 @@
 "use strict";
 
-function table_col_visible(table, cols)
+function table_col_visible(table, visible, cols)
 {
 	const s = cols
 		.map(col => "thead th:nth-child(" + col + "), tbody tr td:nth-child(" + col + ")")
 		.join(", ");
 	
-	$(table).find(s).toggle();
+	if(visible)
+	{
+		$(table).find(s).show();
+	}
+	else
+	{
+		$(table).find(s).hide();
+	}
 }
 
 $(window).on('load', () => {
@@ -14,16 +21,46 @@ $(window).on('load', () => {
 		$(list).addClass("commands");
 		const table = list.nextSibling.nextSibling;
 		$(table).tablesorter({headers: {12: { sorter: "text" }}});
-		table_col_visible(table, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
+		table_col_visible(table, false, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
+		
+		const parts = [
+			{name: "主砲", pushed: true},
+			{name: "副砲", pushed: true},
+			{name: "弾幕", pushed: true}
+		];
+		
+		const parts_list = $("<ul class='parts-list commands'></ul>");
+		$(list).after(parts_list);
+		parts_list.toggle();
 		
 		const level_list = $("<ul class='level-list commands'></ul>");
-		$(list).after(level_list);
+		parts_list.after(level_list);
 		level_list.toggle();
 		
 		const calculation_list = $("<ul class='calculation-list commands'></ul>");
 		level_list.after(calculation_list);
 		calculation_list.toggle();
+		
 		const opts_update = () => {
+			if(opts.filter(x => x.name.startsWith("武装") && x.pushed).length > 0)
+			{
+				parts_list.show();
+			}
+			else
+			{
+				parts_list.hide();
+			}
+			
+			const main_visible    = parts.filter(x => x.name.startsWith("主砲") && x.pushed).length > 0;
+			const sub_visible     = parts.filter(x => x.name.startsWith("副砲") && x.pushed).length > 0;
+			const barrage_visible = parts.filter(x => x.name.startsWith("弾幕") && x.pushed).length > 0;
+			
+			opts.filter(x => x.name.startsWith("武装")).forEach(x => {
+				table_col_visible(table, x.pushed && main_visible,    [x.columns[0]]);
+				table_col_visible(table, x.pushed && sub_visible,     [x.columns[1]]);
+				table_col_visible(table, x.pushed && barrage_visible, [x.columns[2]]);
+			});
+			
 			if(opts.filter(x => (x.name == "武装威力" || x.name == "装甲" || x.name == "資金功績救出") && x.pushed).length > 0)
 			{
 				level_list.show();
@@ -61,7 +98,7 @@ $(window).on('load', () => {
 				const li = $("<li class='buttons" + (opt.pushed ? " pushed" : "") + "'></li>").append(a);
 				a.append(v[0]);
 				a.onclick = () => {
-					table_col_visible(table, opt.columns);
+					table_col_visible(table, !opt.pushed, opt.columns);
 					opt.pushed = !opt.pushed;
 					v.text(opt.pushed ? "非表示" : "表示");
 					li.removeClass("pushed");
@@ -130,6 +167,27 @@ $(window).on('load', () => {
 			});
 		};
 		power_update();
+		
+		parts
+			.map((part) => {
+				const a  = $("<a href='javascript:void(0)' class='box'>" + part.name + "</a>")[0];
+				const li = $("<li class='buttons" + (part.pushed ? " pushed" : "") + "'></li>").append(a);
+				part.li = li;
+				a.onclick = () => {
+					part.pushed = !part.pushed;
+					if(part.pushed)
+					{
+						part.li.addClass("pushed");
+					}
+					else
+					{
+						part.li.removeClass("pushed");
+					}
+					opts_update();
+				};
+				return li;
+			})
+			.forEach(x => x.appendTo(parts_list));
 		
 		levels
 			.map((level) => {
