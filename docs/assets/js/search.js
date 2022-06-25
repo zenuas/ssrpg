@@ -18,7 +18,7 @@ $(window).on('load', function () {
 					});
 					
 					if(finds.length <= 0) return;
-					const name = blob.name.substr(0, blob.name.length - 3);
+					const name = blob.name.substr(0, blob.name.length - 3).replace(/^\d+\./, "");
 					const li = $("<li></li>");
 					const p = $("<p></p>");
 					const a = $("<a></a>").text(name).attr("href", "https://zenuas.github.io/ssrpg/" + name + ".html#:~:text=" + q);
