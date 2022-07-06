@@ -358,44 +358,44 @@ a.box:hover
 
 a.edit
 {
-	background: url(../images/edit.png) no-repeat left center;
+	background: url(edit.png) no-repeat left center;
 	padding-left: 22px;
 }
 
 a.document
 {
-	background: url(../images/document.png) no-repeat left center;
+	background: url(document.png) no-repeat left center;
 	padding-left: 22px;
 }
 
 a.history
 {
-	background: url(../images/history.png) no-repeat left center;
+	background: url(history.png) no-repeat left center;
 	padding-left: 22px;
 }
 
 a.download
 {
-	background: url(../images/arrow-down.png) no-repeat left center;
+	background: url(arrow-down.png) no-repeat left center;
 	padding-left: 22px;
 }
 
 a.github
 {
-	background: url(../images/octocat-small.png) no-repeat left center;
+	background: url(octocat-small.png) no-repeat left center;
 	padding-left: 22px;
 }
 
 input.search
 {
 	text-indent: -1000px;
-	background: #AF0011 url(../images/search.png) no-repeat left 3px center;
+	background: #AF0011 url(search.png) no-repeat left 3px center;
 	padding-left: 23px;
 }
 
 input.search:hover
 {
-	background: #C3001D url(../images/search.png) no-repeat left 3px center;
+	background: #C3001D url(search.png) no-repeat left 3px center;
 }
 
 

@@ -4,16 +4,16 @@
     <meta charset="utf-8">
 
 {% seo %}
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/styles.css?v=' | append: site.github.build_revision | relative_url }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
-    <script src="{{ '/assets/js/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script src="{{ '/assets/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
     {% for scr in page.scripts %}
     {% if scr contains 'https://' %}
     <script src="{{ scr }}"></script>
     {% else %}
-    <script src="{{ scr | prepend: '/assets/js/' | append: '?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script src="{{ scr | prepend: '/assets/' | append: '?v=' | append: site.github.build_revision | relative_url }}"></script>
     {% endif %}
     {% endfor %}
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
