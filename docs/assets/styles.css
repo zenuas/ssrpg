@@ -245,6 +245,28 @@ input
 	padding: 0.4em;
 }
 
+input[type=number]
+{
+	text-align: right;
+}
+
+
+/* Grid Layout */
+
+.grid
+{
+	border: 1px solid black;
+	display: grid;
+	row-gap: 0.25em;
+	column-gap: 0.75em;
+	padding: 0.75em;
+}
+
+.grid2-auto-fr
+{
+	grid-template-columns: auto 1fr;
+}
+
 
 /* Main Contents */
 
