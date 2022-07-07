@@ -238,4 +238,30 @@ $(window).on('load', () => {
 			$.cookie(id, opend ? "open" : "close", { expires: 7 });
 		});
 	});
+	
+	$("input[type=number]").each((_, xinput) => {
+		const input = $(xinput);
+		const min   = parseFloat(input.attr("min"));
+		const max   = parseFloat(input.attr("max"));
+		const step  = input.attr("step");
+		
+		const enable_e     = false;
+		const enable_minus = !(!isNaN(min) && min >= 0);
+		const enable_point = !(step != "" && step.indexOf(".") < 0);
+		
+		input.on("input", () => {
+			const v = parseFloat(input.val());
+			if(isNaN(v)) return;
+			
+			if(!isNaN(min) && min > v) input.val(min);
+			if(!isNaN(max) && max < v) input.val(max);
+		});
+		
+		input.keydown((e) => {
+			if(!enable_e && e.keyCode == 69) return false;
+			if(!enable_minus && (e.keyCode == 189 || e.keyCode == 109)) return false;
+			if(!enable_point && (e.keyCode == 190 || e.keyCode == 110)) return false;
+			return true;
+		});
+	});
 });
