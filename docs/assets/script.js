@@ -251,7 +251,11 @@ $(window).on('load', () => {
 		
 		input.on("input", () => {
 			const v = parseFloat(input.val());
-			if(isNaN(v)) return;
+			if(isNaN(v))
+			{
+				if(xinput.required) input.val(isNaN(min) ? 0 : min);
+				return;
+			}
 			
 			if(!isNaN(min) && min > v) input.val(min);
 			if(!isNaN(max) && max < v) input.val(max);
