@@ -255,8 +255,19 @@ input[type=number]
 
 .grid
 {
-	border: 1px solid black;
+	border-radius: 4px;
+	border: 1px solid #404140;
 	display: grid;
+	row-gap: 0.25em;
+	column-gap: 0.75em;
+	padding: 0.75em;
+}
+
+.inline-grid
+{
+	border-radius: 4px;
+	border: 1px solid #404140;
+	display: inline-grid;
 	row-gap: 0.25em;
 	column-gap: 0.75em;
 	padding: 0.75em;
