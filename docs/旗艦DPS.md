@@ -10,47 +10,47 @@
 <form action="#" method="get" class="inline-grid grid2-auto-fr" oninput="kikan()">
 
 <label for="lv">武装Lv</label>
-<input type="number" id="lv" value="1" min="1" max="999999" step="1" required />
+<input type="number" id="lv" value="1" min="1" max="999999" step="1" data-auto-cookie required />
 
 <label for="status" title="主砲攻撃力、副砲攻撃力、弾幕攻撃力のLv">兵種Lv</label>
-<input type="number" id="status" value="0" min="0" max="9999" step="1" required />
+<input type="number" id="status" value="0" min="0" max="9999" step="1" data-auto-cookie required />
 
 <label for="jyuugeki">重撃チップ</label>
-<input type="number" id="jyuugeki" value="0" min="0" max="1000" step="1" required />
+<input type="number" id="jyuugeki" value="0" min="0" max="1000" step="1" data-auto-cookie required />
 
 <label for="kansyu" title="砲艦、SF、巡洋艦の艦種熟練度Lv">艦種Lv</label>
-<input type="number" id="kansyu" value="9999" min="0" max="9999" step="1" required />
+<input type="number" id="kansyu" value="9999" min="0" max="9999" step="1" data-auto-cookie required />
 
 <label for="ace">一騎当千Lv</label>
-<input type="number" id="ace" value="0" min="0" max="9999" step="1" required />
+<input type="number" id="ace" value="0" min="0" max="9999" step="1" data-auto-cookie required />
 
 <label for="over">銀河の英雄Lv</label>
-<input type="number" id="over" value="9999" min="0" max="9999" step="1" required />
+<input type="number" id="over" value="9999" min="0" max="9999" step="1" data-auto-cookie required />
 
 <label for="pcut">敵艦実弾カット率</label>
-<input type="number" id="pcut" value="0" min="0" max="100" step="0.1" required />
+<input type="number" id="pcut" value="0" min="0" max="100" step="0.1" data-auto-cookie required />
 
 <label for="ecut">敵艦Eカット率</label>
-<input type="number" id="ecut" value="0" min="0" max="100" step="0.1" required />
+<input type="number" id="ecut" value="0" min="0" max="100" step="0.1" data-auto-cookie required />
 
 <label for="autoloading">自動装填チップ</label>
-<input type="number" id="autoloading" value="99" min="0" max="99" step="1" required />
+<input type="number" id="autoloading" value="99" min="0" max="99" step="1" data-auto-cookie required />
 
 <label for="ammo">圧縮弾倉系チップ</label>
-<input type="number" id="mag1" value="600" min="0" max="600" step="1" required />
+<input type="number" id="mag1" value="600" min="0" max="600" step="1" data-auto-cookie required />
 
 <label for="ammo">工作船・消防船</label>
-<input type="number" id="mag2" value="0" min="0" max="6" step="1" required />
+<input type="number" id="mag2" value="0" min="0" max="6" step="1" data-auto-cookie required />
 
 <label>その他</label>
 <fieldset>
-	<label><input type="checkbox" id="pweapon"   checked />実弾兵器</label><br />
-	<label><input type="checkbox" id="eweapon"   checked />エネルギー兵器</label><br />
-	<label><input type="checkbox" id="main"      checked />主砲</label><br />
-	<label><input type="checkbox" id="sub"       checked />副砲</label><br />
-	<label><input type="checkbox" id="barrage"   checked />弾幕</label><br />
-	<label><input type="checkbox" id="outofammo" checked />弾切れ考慮</label><br />
-	<label><input type="checkbox" id="remarks" />備考</label><br />
+	<label><input type="checkbox" id="pweapon"   checked data-auto-cookie />実弾兵器</label><br />
+	<label><input type="checkbox" id="eweapon"   checked data-auto-cookie />エネルギー兵器</label><br />
+	<label><input type="checkbox" id="main"      checked data-auto-cookie />主砲</label><br />
+	<label><input type="checkbox" id="sub"       checked data-auto-cookie />副砲</label><br />
+	<label><input type="checkbox" id="barrage"   checked data-auto-cookie />弾幕</label><br />
+	<label><input type="checkbox" id="outofammo" checked data-auto-cookie />弾切れ考慮</label><br />
+	<label><input type="checkbox" id="remarks" data-auto-cookie />備考</label><br />
 </fieldset>
 
 </form>

@@ -232,6 +232,38 @@ $(window).on('load', () => {
 		});
 	});
 	
+	$("input[data-auto-cookie], select[data-auto-cookie], textarea[data-auto-cookie]").each((_, xinput) => {
+		const input = $(xinput);
+		const id    = "data-auto-cookie" + (
+			input.attr("data-auto-cookie") != undefined && input.attr("data-auto-cookie") != "" ? input.attr("data-auto-cookie") :
+			input.attr("name")             != undefined && input.attr("name")             != "" ? input.attr("name") :
+			input.attr("id")
+			);
+		const value = $.cookie(id);
+		if(value != undefined && value != "")
+		{
+			if(input.attr("type") == "checkbox" || input.attr("type") == "radio")
+			{
+				input.prop("checked", value == "true");
+			}
+			else
+			{
+				input.val(value);
+			}
+			input.trigger("input");
+			input.trigger("change");
+		}
+		
+		if(input.attr("type") == "checkbox" || input.attr("type") == "radio")
+		{
+			input.blur(() => {$.cookie(id, input.prop("checked"), { expires: 7 });});
+		}
+		else
+		{
+			input.blur(() => {$.cookie(id, input.val(), { expires: 7 });});
+		}
+	});
+	
 	$("input[type=number]").each((_, xinput) => {
 		const input = $(xinput);
 		const min   = parseFloat(input.attr("min"));
