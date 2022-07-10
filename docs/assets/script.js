@@ -6,14 +6,7 @@ function table_col_visible(table, visible, cols)
 		.map(col => "thead th:nth-child(" + col + "), tbody tr td:nth-child(" + col + ")")
 		.join(", ");
 	
-	if(visible)
-	{
-		$(table).find(s).show();
-	}
-	else
-	{
-		$(table).find(s).hide();
-	}
+	$(table).find(s).toggle(visible);
 }
 
 $(window).on('load', () => {
