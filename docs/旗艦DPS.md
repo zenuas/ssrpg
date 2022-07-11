@@ -36,10 +36,10 @@
 <label for="autoloading">自動装填チップ</label>
 <input type="number" id="autoloading" value="99" min="0" max="99" step="1" data-auto-cookie required />
 
-<label for="ammo">圧縮弾倉系チップ</label>
+<label for="mag1">圧縮弾倉系チップ</label>
 <input type="number" id="mag1" value="600" min="0" max="600" step="1" data-auto-cookie required />
 
-<label for="ammo">工作船・消防船</label>
+<label for="mag2">工作船・消防船</label>
 <input type="number" id="mag2" value="0" min="0" max="6" step="1" data-auto-cookie required />
 
 <label>その他</label>
