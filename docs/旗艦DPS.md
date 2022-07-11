@@ -466,6 +466,7 @@ const kikan = () => {
 		$(tr).css("display", (((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type == "主砲" && main) || (type == "副砲" && sub) || (type == "弾幕" && barrage)) ? "" : "none"));
 	});
 	
+	$("label[for=mag1], input#mag1, label[for=mag2], input#mag2, label[for=procurement], input#procurement").toggle(outofammo);
 	$("table thead tr th:nth-child(3), table tbody tr td:nth-child(3)").toggle(remarks);
 	$("table").trigger("update");
 };
