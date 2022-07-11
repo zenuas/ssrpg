@@ -4,7 +4,7 @@
 発射した弾が全て着弾した場合のDPSを計算する。
 単発与ダメージは[ダメージ計算](ダメージ計算.md#旗艦の与ダメージ)参照。
 [サイクロプス](チップ.md#サイクロプス)の貫通ダメージ、[多弾頭兵器](その他.md#多弾頭兵器)、消費バリア不足は考慮しない。
-実弾兵器で10秒間に全弾発射してしまう場合、`与ダメージ * 弾数 / 10`をDPSとする。瞬間火力を参照したい場合は弾切れ考慮をOFFにする事。
+実弾兵器で10秒間に全弾発射してしまう場合、`与ダメージ * {弾数 / 100 * 実弾錬成術チップ} / 10`をDPSとする。瞬間火力を参照したい場合は弾切れ考慮をOFFにする事。
 
 
 <form action="#" method="get" class="inline-grid grid2-auto-fr" oninput="kikan()">
@@ -41,6 +41,9 @@
 
 <label for="mag2">工作船・消防船</label>
 <input type="number" id="mag2" value="0" min="0" max="6" step="1" data-auto-cookie required />
+
+<label for="procurement">実弾錬成術チップ</label>
+<input type="number" id="procurement" value="100" min="0" max="100" step="1" data-auto-cookie required />
 
 <label>その他</label>
 <fieldset>
@@ -432,6 +435,7 @@ const kikan = () => {
 	const autoloading = parseInt($("#autoloading").val());
 	const mag1        = parseInt($("#mag1").val());
 	const mag2        = parseInt($("#mag2").val());
+	const procurement = parseInt($("#procurement").val());
 	const pweapon     = $("#pweapon").prop("checked");
 	const eweapon     = $("#eweapon").prop("checked");
 	const main        = $("#main").prop("checked");
@@ -454,7 +458,7 @@ const kikan = () => {
 		const damage     = power + (message == "威力固定兵器" ? 0 : Math.min(power * over, Math.ceil((lvup + jyuugekiup + status) * (1 + kansyu * 0.01)) + ace));
 		const result     = Math.min(9999999, Math.ceil(damage * (100 - parseFloat(bullet > 0 ? pcut : ecut)) / 100));
 		const timep      = Math.max(0.1, time * (100 - autoloading) / 100);
-		const bulletp    = Math.min(9999, Math.ceil(Math.ceil(bullet * (100 + mag1) / 100) * (10 + mag2) / 10));
+		const bulletp    = Math.floor(Math.min(9999, Math.ceil(Math.ceil(bullet * (100 + mag1) / 100) * (10 + mag2) / 10)) / 100 * procurement);
 		const shotp      = outofammo && bullet > 0 && bulletp < shotnum / timep * 10 ? bulletp / 10 : shotnum / timep;
 		
 		dps.text((result * shotp).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
