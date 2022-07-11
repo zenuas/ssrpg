@@ -5,7 +5,7 @@
 単発与ダメージは[ダメージ計算](ダメージ計算.md#旗艦の与ダメージ)参照。
 [サイクロプス](チップ.md#サイクロプス)の貫通ダメージ、[多弾頭兵器](その他.md#多弾頭兵器)は考慮しない。
 実弾兵器で10秒間に全弾発射してしまう場合、`与ダメージ * {弾数 / 100 * 実弾錬成術チップ} / 10`をDPSとする。瞬間火力を参照したい場合は弾切れ考慮をOFFにする事。
-E兵器で消費Eよりバリアが少ない場合は発射不可、消費Eがバリア回復を超える場合は`与ダメージ * バリア回復 / ((消費E * 発射数) / min(1, 装填時間)) * (発射数 / 装填時間)`をDPSとする。瞬間火力を参照したい場合はエネルギー切れ考慮をOFFにする事。
+E兵器で消費Eがバリア回復を超える場合は`与ダメージ * バリア回復 / ((消費E * 発射数) / min(1, 装填時間)) * (発射数 / 装填時間)`をDPSとする。瞬間火力を参照したい場合はエネルギー切れ考慮をOFFにする事。
 
 
 <form action="#" method="get" class="inline-grid grid2-auto-fr" oninput="kikan()">
@@ -490,14 +490,14 @@ const kikan = () => {
 			
 			const shotp      =
 				outofammo && bullet > 0 && bulletp < shotnum / timep * 10 ? bulletp / 10 :
-				outofenergy && bullet == 0 && barrier < energyp * shotnum ? 0 :
+				bullet == 0 && barrier < energyp * shotnum ? 0 :
 				outofenergy && bullet == 0 && barrierregene < energyp * shotnum / timep ? barrierregene / ((energyp * shotnum) / Math.min(1, timep)) * (shotnum / timep) :
 				shotnum / timep;
 			
 			return({energyp : energyp, result : result * shotp});
 		};
 		
-		if(autolv && ((outofammo && bullet > 0) || (outofenergy && bullet == 0)))
+		if(autolv)
 		{
 			const minmax = {min : 0, max : lv, minp : calc(1).result, maxp : calc(lv).result};
 			while(true)
