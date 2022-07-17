@@ -483,7 +483,7 @@ const kikan = () => {
 			const damage     = power + (message == "威力固定兵器" ? 0 : powerup);
 			const result     = Math.min(9999999, Math.ceil(damage * (100 - parseFloat(bullet > 0 ? pcut : ecut)) / 100));
 			const timep      = Math.max(0.1, time * (100 - autoloading) / 100);
-			const bulletp    = Math.floor(Math.min(9999, Math.ceil(Math.ceil(bullet * (100 + mag1) / 100) * (10 + mag2) / 10)) / 100 * procurement);
+			const bulletp    = Math.max(1, Math.floor(Math.min(9999, Math.ceil(Math.ceil(bullet * (100 + mag1) / 100) * (10 + mag2) / 10)) / 100 * procurement));
 			
 			const energy0    = parseInt(energy.attr("data-energy")) + Math.floor(powerup / 500);
 			const energyp    = energy0 - Math.floor(energy0 / 100 * energy1) - (energy1 < 99 || energy2 == 0 ? 0 : Math.floor((energy0 - Math.floor(energy0 / 100 * energy1)) / 100 * Math.max(1, Math.floor(energy2 / 10))));
