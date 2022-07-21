@@ -494,7 +494,7 @@ const kikan = () => {
 				outofenergy && bullet == 0 ? shotnum / timep * Math.min(1, barrier / (energyp * shotnum / timep)) / Math.max(1, energyp * shotnum / timep / barrierregene) :
 				shotnum / timep;
 			
-			return({energyp : energyp, result : result * shotp});
+			return({energyp : bullet > 0 ? 0 : energyp, result : result * shotp});
 		};
 		
 		if(autolv)
