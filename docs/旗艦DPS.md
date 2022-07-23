@@ -499,29 +499,60 @@ const kikan = () => {
 		
 		if(autolv)
 		{
-			const minmax = {min : 0, max : lv, minp : calc(1).result, maxp : calc(lv).result};
-			while(true)
+			const minmax = {
+				max     : 0,
+				maxp    : 0,
+				min     : 0,
+				minp    : 0,
+				energyp : 0
+			};
+			
+			if(bullet > 0)
 			{
-				if(minmax.min + 1 >= minmax.max) break;
-				const xlv = minmax.min + Math.ceil((minmax.max - minmax.min) / 2);
-				const xv  = calc(xlv);
-				if(minmax.maxp == xv.result)
+				minmax.min  = 1;
+				minmax.minp = calc(1).result;
+				minmax.max  = lv;
+				minmax.maxp = calc(lv).result;
+				
+				while(true)
 				{
-					minmax.max  = xlv;
-					minmax.maxp = xv.result;
+					if(minmax.min + 1 >= minmax.max) break;
+					const xlv = minmax.min + Math.ceil((minmax.max - minmax.min) / 2);
+					const xv  = calc(xlv);
+					if(minmax.maxp == xv.result)
+					{
+						minmax.max  = xlv;
+						minmax.maxp = xv.result;
+					}
+					else
+					{
+						minmax.min  = xlv;
+						minmax.minp = xv.result;
+					}
 				}
-				else
+				if(minmax.minp >= minmax.maxp)
 				{
-					minmax.min  = xlv;
-					minmax.minp = xv.result;
+					minmax.max  = minmax.min;
+					minmax.maxp = minmax.minp;
 				}
 			}
-			if(minmax.minp < minmax.maxp) minmax.min = minmax.max;
-			const v = calc(minmax.min);
+			else
+			{
+				for(let i = 1; i <= lv; i++)
+				{
+					var xv = calc(i);
+					if(xv.result > minmax.maxp)
+					{
+						minmax.max     = i;
+						minmax.maxp    = xv.result;
+						minmax.energyp = xv.energyp;
+					}
+				}
+			}
 			
-			energy.text(v.energyp.toLocaleString());
-			autolvc.text(minmax.min.toLocaleString());
-			dps.text(v.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+			energy.text(minmax.energyp.toLocaleString());
+			autolvc.text(minmax.max.toLocaleString());
+			dps.text(minmax.maxp.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 		}
 		else
 		{
