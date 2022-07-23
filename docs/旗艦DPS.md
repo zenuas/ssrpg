@@ -482,7 +482,7 @@ const kikan = () => {
 			const jyuugekiup = jyuugeki == 0 ? 0 : Math.ceil(power * (1 + jyuugeki / 80) * 3) - power;
 			const powerup    = Math.min(power * over, Math.ceil((lvup + jyuugekiup + status) * (1 + kansyu * 0.01)) + ace);
 			const damage     = power + (message == "威力固定兵器" ? 0 : powerup);
-			const result     = Math.min(9999999, Math.ceil(damage * (100 - parseFloat(bullet > 0 ? pcut : ecut)) / 100));
+			const result     = Math.min(9999999, Math.ceil(damage * (100 - (bullet > 0 ? pcut : ecut)) / 100));
 			const timep      = Math.max(0.1, time * (100 - autoloading) / 100);
 			const bulletp    = Math.max(1, Math.floor(Math.min(9999, Math.ceil(Math.ceil(bullet * (100 + mag1) / 100) * (10 + mag2) / 10)) / 100 * procurement));
 			
