@@ -256,11 +256,11 @@ $(window).on('load', () => {
 		
 		if(input.attr("type") == "checkbox" || input.attr("type") == "radio")
 		{
-			input.blur(() => {$.cookie(id, input.prop("checked"), { expires: 7 });});
+			input.change(() => {$.cookie(id, input.prop("checked"), { expires: 7 });});
 		}
 		else
 		{
-			input.blur(() => {$.cookie(id, input.val(), { expires: 7 });});
+			input.change(() => {$.cookie(id, input.val(), { expires: 7 });});
 		}
 	});
 	
