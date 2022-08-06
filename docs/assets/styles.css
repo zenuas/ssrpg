@@ -477,3 +477,19 @@ footer
 	text-align: right;
 	border-top: 1px solid #7C7468;
 }
+
+
+/* Dialog */
+dialog
+{
+	background-color: #5C5C5B;
+	color: #CCC7B6;
+	line-height: 1.8;
+	border-radius: 0.6rem;
+	box-shadow: 5px 5px 2px #741E1A;
+}
+
+dialog::backdrop
+{
+	background-color: rgba(0, 0, 0, 0.4);
+}

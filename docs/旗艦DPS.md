@@ -5,7 +5,7 @@
 単発与ダメージは[ダメージ計算](ダメージ計算.md#旗艦の与ダメージ)参照。
 [サイクロプス](チップ.md#サイクロプス)の貫通ダメージ、[多弾頭兵器](その他.md#多弾頭兵器)は考慮しない。
 実弾兵器で10秒間に全弾発射してしまう場合、`与ダメージ * {弾数 / 100 * 実弾錬成術チップ} / 10`をDPSとする。瞬間火力を参照したい場合は弾切れ考慮をOFFにする事。
-E兵器で消費Eがバリア回復を超える場合は`与ダメージ * 発射数 / 装填時間 * min(1, バリア / (消費E * 発射数 / 装填時間)) / max(1, 消費E * 発射数 / 装填時間 / バリア回復)`をDPSとする。瞬間火力を参照したい場合はエネルギー切れ考慮をOFFにする事。
+E兵器で消費Eがバリア回復を超える場合は`与ダメージ * 発射数 / 装填時間 * バリア回復時間調整`をDPSとする。瞬間火力を参照したい場合はエネルギー切れ考慮をOFFにする事。
 
 
 <form action="#" method="get" class="inline-grid grid2-auto-fr" oninput="kikan()">
@@ -434,6 +434,17 @@ E兵器で消費Eがバリア回復を超える場合は`与ダメージ * 発�
 | 弾幕 | 対空レーザーλ                 |                            |    30 |      0.3 |      2 |    0 |         30 |   0 |   0 |
 
 <script>
+const dialog   = $(`<dialog><aside></aside></dialog>`);
+const dialogin = dialog.children("aside");
+dialog.on("click", (e) => {
+	if(e.target.closest("aside") === null)
+	{
+		dialog[0].close();
+		$("body").css("overflow", "auto");
+	}
+});
+$("body").append(dialog);
+
 const stepover100 = (lv) => {
 	var a = Math.floor(lv / 100);
 	var b = lv % 100;
@@ -468,6 +479,7 @@ const kikan = () => {
 	
 	$("table tbody tr").each((_, tr) => {
 		const type    = $(tr.children[0]).text();
+		const name    = $(tr.children[1]);
 		const message = $(tr.children[2]).text();
 		const power   = parseInt($(tr.children[3]).text());
 		const time    = parseFloat($(tr.children[4]).text());
@@ -484,18 +496,42 @@ const kikan = () => {
 			const damage     = power + (message == "威力固定兵器" ? 0 : powerup);
 			const result     = Math.min(9999999, Math.ceil(damage * (100 - (bullet > 0 ? pcut : ecut)) / 100));
 			const timep      = Math.max(0.1, time * (100 - autoloading) / 100);
-			const bulletp    = Math.max(1, Math.floor(Math.min(9999, Math.ceil(Math.ceil(bullet * (100 + mag1) / 100) * (10 + mag2) / 10)) / 100 * procurement));
 			
-			const energy0    = parseInt(energy.attr("data-energy")) + Math.floor(powerup / 500);
-			const energyp    = energy0 - Math.floor(energy0 / 100 * energy1) - (energy1 < 99 || energy2 == 0 ? 0 : Math.floor((energy0 - Math.floor(energy0 / 100 * energy1)) / 100 * Math.max(1, Math.floor(energy2 / 10))));
-			
-			const shotp      =
-				outofammo && bullet > 0 && bulletp < shotnum / timep * 10 ? bulletp / 10 :
-				bullet == 0 && barrier < energyp * shotnum ? 0 :
-				outofenergy && bullet == 0 ? shotnum / timep * Math.min(1, barrier / (energyp * shotnum / timep)) / Math.max(1, energyp * shotnum / timep / barrierregene) :
-				shotnum / timep;
-			
-			return({energyp : bullet > 0 ? 0 : energyp, result : result * shotp});
+			if(bullet > 0)
+			{
+				const bulletp = Math.max(1, Math.floor(Math.min(9999, Math.ceil(Math.ceil(bullet * (100 + mag1) / 100) * (10 + mag2) / 10)) / 100 * procurement));
+				const shotp   =
+					outofammo && bulletp < shotnum / timep * 10 ? bulletp / 10 :
+					shotnum / timep;
+				
+				return({energyp : 0, result : result * shotp, shotp : shotp});
+			}
+			else
+			{
+				const energy0  = parseInt(energy.attr("data-energy")) + Math.floor(powerup / 500);
+				const energyp  = energy0 - Math.floor(energy0 / 100 * energy1) - (energy1 < 99 || energy2 == 0 ? 0 : Math.floor((energy0 - Math.floor(energy0 / 100 * energy1)) / 100 * Math.max(1, Math.floor(energy2 / 10))));
+				const energyps = energyp * shotnum;
+				
+				if(barrier < energyps)
+				{
+					return({energyp : energyp, result : 0, shotp : 0});
+				}
+				else if(!outofenergy || energyps / timep <= barrierregene)
+				{
+					return({energyp : energyp, result : result * shotnum / timep, shotp : shotnum / timep});
+				}
+				
+				const energytp = energyps / timep;
+				const timep2   = timep < 1.0 && energytp > barrierregene ? barrierregene / energyps : timep;
+				const energyt  = Math.min(energytp, energyps * Math.floor(barrierregene / energyps));
+				const recovert = Math.ceil(energyt / barrierregene);
+				const shortage = energyps - (barrierregene * (recovert - 1));
+				const surplus  = Math.min(barrier, barrierregene * recovert) - energyt;
+				
+				const shotp = shotnum / timep2 * (1 + (surplus >= shortage ? surplus * 2 / shortage : 0));
+				
+				return({energyp : energyp, result : result * shotp, shotp : shotp});
+			}
 		};
 		
 		if(autolv)
@@ -563,6 +599,39 @@ const kikan = () => {
 			autolvc.text(lv.toLocaleString());
 			dps.text(v.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 		}
+		
+		const name_v = name.text();
+		const name_a = $(`<a>${ name_v }</a>`);
+		name_a.on("click", () => {
+			dialogin.empty();
+			const table = $(`
+				<table>
+					<thead>
+					<th>Lv</th>
+					<th>消費バリア</th>
+					<th>発射数/秒</th>
+					<th>DPS</th>
+					</thead>
+					<tbody></tbody>
+				</table>`);
+			table.children("tbody").append(Array.from(Array(lv), (_, i) => {
+				const v = calc(i + 1);
+				return($(`
+					<tr>
+						<td style="text-align: right">${ i + 1 }</td>
+						<td style="text-align: right">${ v.energyp.toLocaleString() }</td>
+						<td style="text-align: right">${ v.shotp.toLocaleString() }</td>
+						<td style="text-align: right">${ v.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) }</td>
+					</tr>`));
+				}));
+			table.tablesorter();
+			dialogin.append(table);
+			dialog.scrollTop(0);
+			dialog[0].showModal();
+			$("body").css("overflow", "hidden");
+		});
+		name.empty();
+		name.append(name_a);
 		
 		$(tr).css("display", (((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type == "主砲" && main) || (type == "副砲" && sub) || (type == "弾幕" && barrage)) ? "" : "none"));
 	});
