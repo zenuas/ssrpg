@@ -239,7 +239,7 @@ td
 
 /* Form */
 
-input
+input, select
 {
 	border-radius: 0.7em;
 	padding: 0.4em;
