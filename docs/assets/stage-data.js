@@ -124,8 +124,8 @@ const stage_datas = {
 		{emax: 35, est: 3, esp: 1, dist: 30, bmo: 999, bex: 999, bpo: 350, zmo: 2920, zex: 2832, zpo: 416, znm: 23},
 	],
 	"戦闘訓練場": [
-		{emax: 50, est: 3.5, esp: 1, dist: 40, bmo: 1, bex: 1, bpo: -1, zmo: 1, zex: 1, zpo: -1, znm: 1},
-		{emax: 50, est: 3, esp: 1, dist: 40, bmo: 1, bex: 1, bpo: -1, zmo: 2, zex: 2, zpo: -2, znm: 2},
+		{emax: 50, est: 3.5, esp: 1, dist: 40, bmo: 1, bex: 1, bpo: 0, zmo: 1, zex: 1, zpo: 0, znm: 1},
+		{emax: 50, est: 3, esp: 1, dist: 40, bmo: 1, bex: 1, bpo: 0, zmo: 2, zex: 2, zpo: 0, znm: 2},
 	],
 	"フロンティア9遺跡": [
 		{emax: 15, est: 4, esp: 1, dist: 30, bmo: 110, bex: 110, bpo: 1, zmo: 200, zex: 200, zpo: 2, znm: 2},
@@ -224,7 +224,7 @@ const stage_datas = {
 		{emax: 40, est: 3.5, esp: 2, dist: 30, bmo: 1800, bex: 1800, bpo: 1, zmo: 3130, zex: 3160, zpo: 467, znm: 9},
 		{emax: 40, est: 3.5, esp: 2, dist: 30, bmo: 1800, bex: 1800, bpo: 1, zmo: 3130, zex: 3160, zpo: 467, znm: 9},
 		{emax: 45, est: 3.5, esp: 2, dist: 30, bmo: 2500, bex: 2500, bpo: 400, zmo: 3130, zex: 3160, zpo: 467, znm: 9},
-		{emax: 40, est: 3.5, esp: -1, dist: 30, bmo: 4000, bex: 4000, bpo: 0, zmo: 3130, zex: 3160, zpo: 467, znm: 9},
+		{emax: 40, est: 3.5, esp: 0, dist: 30, bmo: 4000, bex: 4000, bpo: 0, zmo: 3130, zex: 3160, zpo: 467, znm: 9},
 	],
 	"恒星アウレリウス": [
 		{emax: 40, est: 3.5, esp: 2, dist: 30, bmo: 1000, bex: 1000, bpo: 0, zmo: 1000, zex: 1000, zpo: 0, znm: 1},
