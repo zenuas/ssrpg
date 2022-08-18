@@ -262,7 +262,7 @@ const stage_datas = {
 		{emax: 50, est: 3.5, esp: 5, dist: 30, bmo: 2500, bex: 2500, bpo: 400, zmo: 1460, zex: 1490, zpo: 31, znm: 4},
 		{emax: 50, est: 3.5, esp: 2, dist: 30, bmo: 5000, bex: 5000, bpo: 8000, zmo: 1700, zex: 1700, zpo: 1, znm: 1},
 	],
-	"地球軌道上": [
+	"小惑星ベヒモス": [
 		{emax: 70, est: 1, esp: 1, dist: 30, bmo: 3000, bex: 3000, bpo: 1000, zmo: 9316, zex: 2566, zpo: 1860, znm: 27},
 	],
 	"超重力宙域H1": [
