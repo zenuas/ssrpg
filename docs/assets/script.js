@@ -13,6 +13,7 @@ $(window).on('load', () => {
 	$(".enemies-list").each((_, list) => {
 		$(list).addClass("commands");
 		const table = list.nextSibling.nextSibling;
+		const isbattle = $(list).hasClass("rank-battle");
 		$(table).tablesorter({headers: {12: { sorter: "text" }}});
 		table_col_visible(table, false, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
 		
@@ -27,12 +28,17 @@ $(window).on('load', () => {
 		parts_list.toggle();
 		
 		const level_list = $("<ul class='level-list commands'></ul>");
-		parts_list.after(level_list);
-		level_list.toggle();
 		
 		const calculation_list = $("<ul class='calculation-list commands'></ul>");
-		level_list.after(calculation_list);
-		calculation_list.toggle();
+		
+		if(!isbattle)
+		{
+			parts_list.after(level_list);
+			level_list.toggle();
+			
+			level_list.after(calculation_list);
+			calculation_list.toggle();
+		}
 		
 		const opts_update = () => {
 			if(opts.filter(x => x.name.startsWith("武装") && x.pushed).length > 0)
@@ -133,6 +139,16 @@ $(window).on('load', () => {
 			{name: "ボス", pushed: !is_solar_systems, boss: true,  func: (a, b, c) => c}
 		];
 		
+		const rank_to_lv = (rank) => {
+			if(rank <=  48) return(0);
+			if(rank <=  98) return(Math.min(2000,  rank -  48));
+			if(rank <= 148) return(Math.min(2000, (rank -  98) *  3 +   50));
+			if(rank <= 198) return(Math.min(2000, (rank - 148) *  7 +  200));
+			if(rank <= 248) return(Math.min(2000, (rank - 198) * 12 +  550));
+			if(rank <= 298) return(Math.min(2000, (rank - 248) * 18 + 1150));
+			return(Math.min(2000, (rank - 298) * 30 + 2050));
+		};
+		
 		const change_cols = "tbody tr td:nth-child(5), tbody tr td:nth-child(9), tbody tr td:nth-child(13), tbody tr td:nth-child(25), tbody tr td:nth-child(29), tbody tr td:nth-child(30)";
 		$(table).find(change_cols).each((_, x) => $(x).attr("xvalue", $(x).text() - 0));
 		const power_update = () => {
@@ -145,12 +161,14 @@ $(window).on('load', () => {
 				const value    = td.attr("xvalue") - 0;
 				if(isNaN(value)) return;
 				
-				const boss = $(x.parentNode.children[32 - 1]).text().indexOf("ボス") >= 0;
-				const lv   = calc.func(level.min, level.max, boss ? level.boss : level.max);
+				const stage = $(x.parentNode.children[32 - 1]).text();
+				const boss  = isbattle ? true : stage.indexOf("ボス") >= 0;
+				const rank  = isbattle ? parseInt(stage.match(/ランク(\d+～)?(\d+)/)[2]) : 0;
+				const lv    = isbattle ? rank_to_lv(rank) : calc.func(level.min, level.max, boss ? level.boss : level.max);
 				if(td_index <= 12)
 				{
 					const weapon     = $(x.parentNode.children[td_index == 4 ? 1 : td_index == 8 ? 2 : 3]).text();
-					const power_plus = weapon.indexOf("Lv補正") >= 0 ? lv : weapon.indexOf("Lv*5補正") >= 0 ? lv * 5 : 0;
+					const power_plus = weapon.indexOf("Lv補正") >= 0 ? lv : weapon.indexOf("Lv*5補正") >= 0 ? lv * 5 : rank >= 300 ? rank : 0;
 					td.text(Math.floor(value + power_plus + Math.ceil(value * lv / 2)).toLocaleString());
 				}
 				else
