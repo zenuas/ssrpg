@@ -299,6 +299,9 @@ input[type=number]
 		top: 0;
 		position: sticky;
 		align-self: baseline;
+		max-height: calc(100vh - 3.0rem);
+		min-width: 12.0rem;
+		overflow: auto;
 	}
 }
 
