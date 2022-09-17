@@ -176,6 +176,7 @@ $(window).on('load', () => {
 					td.text(Math.floor(value + Math.ceil(value * lv / (td_index == 29 - 1 ? 10 : 2))).toLocaleString());
 				}
 			});
+			$(table).trigger("update");
 		};
 		power_update();
 		
