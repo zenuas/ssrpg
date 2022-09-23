@@ -1,20 +1,23 @@
 "use strict";
 
+import Cookies from "https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.mjs";
+import * as TableSort from "./table-sort.js";
+import * as Dom from "./dom.js";
+
 function table_col_visible(table, visible, cols)
 {
 	const s = cols
-		.map(col => "thead th:nth-child(" + col + "), tbody tr td:nth-child(" + col + ")")
+		.map(col => `thead th:nth-child(${ col }), tbody tr td:nth-child(${ col })`)
 		.join(", ");
 	
-	$(table).find(s).toggle(visible);
+	table.querySelectorAll(s).forEach(x => x.classList.toggle("none", !visible));
 }
 
-$(window).on('load', () => {
-	$(".enemies-list").each((_, list) => {
-		$(list).addClass("commands");
+window.addEventListener("load", () => {
+	document.querySelectorAll(".enemies-list").forEach(list => {
+		list.classList.add("commands");
 		const table = list.nextSibling.nextSibling;
-		const isbattle = $(list).hasClass("rank-battle");
-		$(table).tablesorter({headers: {12: { sorter: "text" }}});
+		const isbattle = list.classList.contains("rank-battle");
 		table_col_visible(table, false, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
 		
 		const parts = [
@@ -23,32 +26,19 @@ $(window).on('load', () => {
 			{name: "弾幕", pushed: true}
 		];
 		
-		const parts_list = $("<ul class='parts-list commands'></ul>");
-		$(list).after(parts_list);
-		parts_list.toggle();
-		
-		const level_list = $("<ul class='level-list commands'></ul>");
-		
-		const calculation_list = $("<ul class='calculation-list commands'></ul>");
+		const parts_list       = Dom.create("ul", {className: "parts-list commands none"});
+		const level_list       = Dom.create("ul", {className: "level-list commands none"});
+		const calculation_list = Dom.create("ul", {className: "calculation-list commands none"});
+		list.parentNode.insertBefore(parts_list, list.nextElementSibling);
 		
 		if(!isbattle)
 		{
-			parts_list.after(level_list);
-			level_list.toggle();
-			
-			level_list.after(calculation_list);
-			calculation_list.toggle();
+			parts_list.parentNode.insertBefore(level_list,       parts_list.nextElementSibling);
+			level_list.parentNode.insertBefore(calculation_list, level_list.nextElementSibling);
 		}
 		
 		const opts_update = () => {
-			if(opts.filter(x => x.name.startsWith("武装") && x.pushed).length > 0)
-			{
-				parts_list.show();
-			}
-			else
-			{
-				parts_list.hide();
-			}
+			parts_list.classList.toggle("none", opts.filter(x => x.name.startsWith("武装") && x.pushed).length == 0);
 			
 			const main_visible    = parts.filter(x => x.name.startsWith("主砲") && x.pushed).length > 0;
 			const sub_visible     = parts.filter(x => x.name.startsWith("副砲") && x.pushed).length > 0;
@@ -60,16 +50,9 @@ $(window).on('load', () => {
 				table_col_visible(table, x.pushed && barrage_visible, [x.columns[2]]);
 			});
 			
-			if(opts.filter(x => (x.name == "武装威力" || x.name == "装甲" || x.name == "資金功績救出") && x.pushed).length > 0)
-			{
-				level_list.show();
-				calculation_list.show();
-			}
-			else
-			{
-				level_list.hide();
-				calculation_list.hide();
-			}
+			const hidden = opts.filter(x => (x.name == "武装威力" || x.name == "装甲" || x.name == "資金功績救出") && x.pushed).length == 0;
+			level_list.classList.toggle("none", hidden);
+			calculation_list.classList.toggle("none", hidden);
 		};
 		
 		const opts = [
@@ -91,24 +74,25 @@ $(window).on('load', () => {
 		];
 		
 		opts
-			.map((opt) => {
-				const v  = $("<span>" + (opt.pushed ? "非表示" : "表示") + "</span>");
-				const a  = $("<a href='javascript:void(0)' class='box'>" + opt.name + "</a>")[0];
-				const li = $("<li class='buttons" + (opt.pushed ? " pushed" : "") + "'></li>").append(a);
-				a.append(v[0]);
+			.map(opt => {
+				const v  = Dom.create("span", {}, opt.pushed ? "非表示" : "表示");
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, opt.name);
+				const li = Dom.create("li", {className: "buttons" + (opt.pushed ? " pushed" : "")});
+				li.appendChild(a);
+				a.appendChild(v);
 				a.onclick = () => {
 					table_col_visible(table, !opt.pushed, opt.columns);
 					opt.pushed = !opt.pushed;
-					v.text(opt.pushed ? "非表示" : "表示");
-					li.removeClass("pushed");
-					if(opt.pushed) li.addClass("pushed");
+					v.textContent = opt.pushed ? "非表示" : "表示";
+					li.classList.remove("pushed");
+					if(opt.pushed) li.classList.add("pushed");
 					opts_update();
 				};
 				return li;
 			})
-			.forEach(x => x.appendTo(list));
+			.forEach(x => list.appendChild(x));
 		
-		const area_name = $("h2:first-child").text();
+		const area_name = document.querySelector("h2:first-child").textContent;
 		const is_solar_systems = [
 			"月",
 			"火星",
@@ -150,162 +134,146 @@ $(window).on('load', () => {
 		};
 		
 		const change_cols = "tbody tr td:nth-child(5), tbody tr td:nth-child(9), tbody tr td:nth-child(13), tbody tr td:nth-child(25), tbody tr td:nth-child(29), tbody tr td:nth-child(30)";
-		$(table).find(change_cols).each((_, x) => $(x).attr("xvalue", $(x).text() - 0));
+		table.querySelectorAll(change_cols).forEach(x => x.xvalue = x.textContent - 0);
 		const power_update = () => {
 			const level = levels.filter(x => x.pushed)[0];
 			const calc  = calculations.filter(x => x.pushed)[0];
 			
-			$(table).find(change_cols).each((_, x) => {
-				const td_index = Array.prototype.indexOf.call(x.parentNode.children, x);
-				const td       = $(x);
-				const value    = td.attr("xvalue") - 0;
+			table.querySelectorAll(change_cols).forEach(td => {
+				const td_index = Array.prototype.indexOf.call(td.parentNode.children, td);
+				const value    = td.xvalue - 0;
 				if(isNaN(value)) return;
 				
-				const stage = $(x.parentNode.children[32 - 1]).text();
+				const stage = td.parentNode.children[32 - 1].textContent;
 				const boss  = isbattle ? true : stage.indexOf("ボス") >= 0;
 				const rank  = isbattle ? parseInt(stage.match(/ランク(\d+～)?(\d+)/)[2]) : 0;
 				const lv    = isbattle ? rank_to_lv(rank) : calc.func(level.min, level.max, boss ? level.boss : level.max);
 				if(td_index <= 12)
 				{
-					const weapon     = $(x.parentNode.children[td_index == 4 ? 1 : td_index == 8 ? 2 : 3]).text();
+					const weapon     = td.parentNode.children[td_index == 4 ? 1 : td_index == 8 ? 2 : 3].textContent;
 					const power_plus = weapon.indexOf("Lv補正") >= 0 ? lv : weapon.indexOf("Lv*5補正") >= 0 ? lv * 5 : rank >= 300 ? rank : 0;
-					td.text(Math.floor(value + power_plus + Math.ceil(value * lv / 2)).toLocaleString());
+					td.textContent = Math.floor(value + power_plus + Math.ceil(value * lv / 2)).toLocaleString();
 				}
 				else
 				{
-					td.text(Math.floor(value + Math.ceil(value * lv / (td_index == 29 - 1 ? 10 : 2))).toLocaleString());
+					td.textContent = Math.floor(value + Math.ceil(value * lv / (td_index == 29 - 1 ? 10 : 2))).toLocaleString();
 				}
 			});
-			$(table).trigger("update");
+			table.dispatchEvent(new Event("update"));
 		};
 		power_update();
 		
 		parts
-			.map((part) => {
-				const a  = $("<a href='javascript:void(0)' class='box'>" + part.name + "</a>")[0];
-				const li = $("<li class='buttons" + (part.pushed ? " pushed" : "") + "'></li>").append(a);
+			.map(part => {
+				const a  = Dom.create("a",  {href: "javascript:void(0)", className: "box"}, part.name);
+				const li = Dom.create("li", {className: "buttons" + (part.pushed ? " pushed" : "")});
+				li.appendChild(a);
 				part.li = li;
 				a.onclick = () => {
 					part.pushed = !part.pushed;
-					if(part.pushed)
-					{
-						part.li.addClass("pushed");
-					}
-					else
-					{
-						part.li.removeClass("pushed");
-					}
+					part.li.classList.toggle("pushed", part.pushed);
 					opts_update();
 				};
 				return li;
 			})
-			.forEach(x => x.appendTo(parts_list));
+			.forEach(x => parts_list.appendChild(x));
 		
 		levels
-			.map((level) => {
-				const a  = $("<a href='javascript:void(0)' class='box'>" + level.name + "</a>")[0];
-				const li = $("<li class='buttons" + (level.pushed ? " pushed" : "") + "'></li>").append(a);
+			.map(level => {
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, level.name);
+				const li = Dom.create("li", {className: "buttons" + (level.pushed ? " pushed" : "")});
+				li.appendChild(a);
 				level.li = li;
 				a.onclick = () => {
-					levels.forEach(x => {x.pushed = false; x.li.removeClass("pushed");});
+					levels.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
 					level.pushed = true;
-					level.li.addClass("pushed");
+					level.li.classList.add("pushed");
 					power_update();
 				};
 				return li;
 			})
-			.forEach(x => x.appendTo(level_list));
+			.forEach(x => level_list.appendChild(x));
 		
 		calculations
 			.map((calc) => {
-				const a  = $("<a href='javascript:void(0)' class='box'>" + calc.name + "</a>")[0];
-				const li = $("<li class='buttons" + (calc.pushed ? " pushed" : "") + "'></li>").append(a);
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, calc.name);
+				const li = Dom.create("li", {className: "buttons" + (calc.pushed ? " pushed" : "")});
+				li.appendChild(a);
 				calc.li = li;
 				a.onclick = () => {
-					calculations.forEach(x => {x.pushed = false; x.li.removeClass("pushed");});
+					calculations.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
 					calc.pushed = true;
-					calc.li.addClass("pushed");
+					calc.li.classList.add("pushed");
 					power_update();
 				};
-				if(calc.boss && is_solar_systems) $(li).toggle();
+				if(calc.boss && is_solar_systems) li.classList.add("none");
 				return li;
 			})
-			.forEach(x => x.appendTo(calculation_list));
+			.forEach(x => calculation_list.appendChild(x));
 	});
 	
-	$("table:not(.tablesorter)").tablesorter();
+	document.querySelectorAll("table:not(.table-sort)").forEach(x => TableSort.attach(x));
 	
-	$("details[id^=details-cookie-]").each((_, xdetails) => {
-		const details = $(xdetails);
-		const id = xdetails.id;
-		
-		const value = $.cookie(id);
-		if(value == "close")
-		{
-			details.removeAttr("open");
-		}
-		
-		details.on("toggle", () => {
-			const opend = details.attr("open") == "open";
-			$.cookie(id, opend ? "open" : "close", { expires: 7 });
-		});
+	document.querySelectorAll("details[id^=details-cookie-]").forEach(details => {
+		const id    = details.id;
+		const value = Cookies.get(id);
+		if(value == "close") details.open = false;
+		details.addEventListener("toggle", () => Cookies.set(id, details.open ? "open" : "close", { expires: 7 }));
 	});
 	
-	$("input[data-auto-cookie], select[data-auto-cookie], textarea[data-auto-cookie]").each((_, xinput) => {
-		const input = $(xinput);
+	document.querySelectorAll("input[data-auto-cookie], select[data-auto-cookie], textarea[data-auto-cookie]").forEach(input => {
 		const id    = "data-auto-cookie" + (
-			input.attr("data-auto-cookie") != undefined && input.attr("data-auto-cookie") != "" ? input.attr("data-auto-cookie") :
-			input.attr("name")             != undefined && input.attr("name")             != "" ? input.attr("name") :
-			input.attr("id")
+			input.dataset.autoCookie != undefined && input.dataset.autoCookie != "" ? input.dataset.autoCookie :
+			input.name               != undefined && input.name               != "" ? input.name :
+			input.id
 			);
-		const value = $.cookie(id);
+		const value = Cookies.get(id);
 		if(value != undefined && value != "")
 		{
-			if(input.attr("type") == "checkbox" || input.attr("type") == "radio")
+			if(input.type == "checkbox" || input.type == "radio")
 			{
-				input.prop("checked", value == "true");
+				input.checked = value == "true";
 			}
 			else
 			{
-				input.val(value);
+				input.value = value;
 			}
-			input.trigger("input");
-			input.trigger("change");
+			input.dispatchEvent(new Event("input",  {bubbles: true, cancelable: true}));
+			input.dispatchEvent(new Event("change", {bubbles: true, cancelable: true}));
 		}
 		
-		if(input.attr("type") == "checkbox" || input.attr("type") == "radio")
+		if(input.type == "checkbox" || input.type == "radio")
 		{
-			input.change(() => {$.cookie(id, input.prop("checked"), { expires: 7 });});
+			input.addEventListener("change", () => Cookies.set(id, input.checked, { expires: 7 }));
 		}
 		else
 		{
-			input.change(() => {$.cookie(id, input.val(), { expires: 7 });});
+			input.addEventListener("change", () => Cookies.set(id, input.value, { expires: 7 }));
 		}
 	});
 	
-	$("input[type=number]").each((_, xinput) => {
-		const input = $(xinput);
-		const min   = parseFloat(input.attr("min"));
-		const max   = parseFloat(input.attr("max"));
-		const step  = input.attr("step");
+	document.querySelectorAll("input[type=number]").forEach(input => {
+		const min  = parseFloat(input.min);
+		const max  = parseFloat(input.max);
+		const step = input.step;
 		
 		const enable_e     = false;
 		const enable_minus = !(!isNaN(min) && min >= 0);
 		const enable_point = !(step != "" && step.indexOf(".") < 0);
 		
-		input.on("input", () => {
-			const v = parseFloat(input.val());
+		input.addEventListener("input", () => {
+			const v = parseFloat(input.value);
 			if(isNaN(v))
 			{
-				if(xinput.required) input.val(isNaN(min) ? 0 : min);
+				if(input.required) input.value = isNaN(min) ? 0 : min;
 				return;
 			}
 			
-			if(!isNaN(min) && min > v) input.val(min);
-			if(!isNaN(max) && max < v) input.val(max);
+			if(!isNaN(min) && min > v) input.value = min;
+			if(!isNaN(max) && max < v) input.value = max;
 		});
 		
-		input.keydown((e) => {
+		input.addEventListener("keydown", e => {
 			if(!enable_e && e.keyCode == 69) return false;
 			if(!enable_minus && (e.keyCode == 189 || e.keyCode == 109)) return false;
 			if(!enable_point && (e.keyCode == 190 || e.keyCode == 110)) return false;

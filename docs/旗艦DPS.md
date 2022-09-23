@@ -433,17 +433,20 @@ E兵器で消費Eがバリア回復を超える場合は`与ダメージ * 発�
 | 弾幕 | メガバルカン9                  |                            |    15 |      0.2 |      2 | 1000 |          0 |   0 |   0 |
 | 弾幕 | 対空レーザーλ                 |                            |    30 |      0.3 |      2 |    0 |         30 |   0 |   0 |
 
-<script>
-const dialog   = $(`<dialog><aside></aside></dialog>`);
-const dialogin = dialog.children("aside");
-dialog.on("click", (e) => {
+<script type="module">
+import * as TableSort from "./assets/table-sort.js";
+import * as Dom from "./assets/dom.js";
+
+const dialog   = Dom.from_html(`<dialog><aside></aside></dialog>`);
+const dialogin = dialog.querySelector("aside");
+dialog.onclick = e => {
 	if(e.target.closest("aside") === null)
 	{
-		dialog[0].close();
-		$("body").css("overflow", "auto");
+		dialog.close();
+		document.body.style.overflow = "auto";
 	}
-});
-$("body").append(dialog);
+};
+document.body.appendChild(dialog);
 
 const stepover100 = (lv) => {
 	var a = Math.floor(lv / 100);
@@ -451,43 +454,43 @@ const stepover100 = (lv) => {
 	return((a + 1) * (50 * a + b + 1) - 1);
 };
 const kikan = () => {
-	const lv            = parseInt($("#lv").val());
-	const status        = stepover100(parseInt($("#status").val()));
-	const jyuugeki      = parseInt($("#jyuugeki").val());
-	const kansyu        = parseInt($("#kansyu").val());
-	const ace           = stepover100(parseInt($("#ace").val()));
-	const over          = parseInt($("#over").val()) + 10000;
-	const pcut          = parseFloat($("#pcut").val());
-	const ecut          = parseFloat($("#ecut").val());
-	const autoloading   = parseInt($("#autoloading").val());
-	const mag1          = parseInt($("#mag1").val());
-	const mag2          = parseInt($("#mag2").val());
-	const procurement   = parseInt($("#procurement").val());
-	const energy1       = parseInt($("#energy1").val());
-	const energy2       = parseInt($("#energy2").val());
-	const barrier       = parseInt($("#barrier").val());
-	const barrierregene = parseInt($("#barrierregene").val());
-	const pweapon       = $("#pweapon").prop("checked");
-	const eweapon       = $("#eweapon").prop("checked");
-	const main          = $("#main").prop("checked");
-	const sub           = $("#sub").prop("checked");
-	const barrage       = $("#barrage").prop("checked");
-	const outofammo     = $("#outofammo").prop("checked");
-	const outofenergy   = $("#outofenergy").prop("checked");
-	const remarks       = $("#remarks").prop("checked");
-	const autolv        = $("#autolv").prop("checked");
+	const lv            = parseInt(document.getElementById("lv").value);
+	const status        = stepover100(parseInt(document.getElementById("status").value));
+	const jyuugeki      = parseInt(document.getElementById("jyuugeki").value);
+	const kansyu        = parseInt(document.getElementById("kansyu").value);
+	const ace           = stepover100(parseInt(document.getElementById("ace").value));
+	const over          = parseInt(document.getElementById("over").value) + 10000;
+	const pcut          = parseFloat(document.getElementById("pcut").value);
+	const ecut          = parseFloat(document.getElementById("ecut").value);
+	const autoloading   = parseInt(document.getElementById("autoloading").value);
+	const mag1          = parseInt(document.getElementById("mag1").value);
+	const mag2          = parseInt(document.getElementById("mag2").value);
+	const procurement   = parseInt(document.getElementById("procurement").value);
+	const energy1       = parseInt(document.getElementById("energy1").value);
+	const energy2       = parseInt(document.getElementById("energy2").value);
+	const barrier       = parseInt(document.getElementById("barrier").value);
+	const barrierregene = parseInt(document.getElementById("barrierregene").value);
+	const pweapon       = document.getElementById("pweapon").checked;
+	const eweapon       = document.getElementById("eweapon").checked;
+	const main          = document.getElementById("main").checked;
+	const sub           = document.getElementById("sub").checked;
+	const barrage       = document.getElementById("barrage").checked;
+	const outofammo     = document.getElementById("outofammo").checked;
+	const outofenergy   = document.getElementById("outofenergy").checked;
+	const remarks       = document.getElementById("remarks").checked;
+	const autolv        = document.getElementById("autolv").checked;
 	
-	$("table tbody tr").each((_, tr) => {
-		const type    = $(tr.children[0]).text();
-		const name    = $(tr.children[1]);
-		const message = $(tr.children[2]).text();
-		const power   = parseInt($(tr.children[3]).text());
-		const time    = parseFloat($(tr.children[4]).text());
-		const shotnum = parseInt($(tr.children[5]).text());
-		const bullet  = parseInt($(tr.children[6]).text());
-		const energy  = $(tr.children[7]);
-		const autolvc = $(tr.children[8]);
-		const dps     = $(tr.children[9]);
+	document.querySelectorAll("table tbody tr").forEach(tr => {
+		const type    = tr.children[0].textContent;
+		const name    = tr.children[1];
+		const message = tr.children[2].textContent;
+		const power   = parseInt(tr.children[3].textContent);
+		const time    = parseFloat(tr.children[4].textContent);
+		const shotnum = parseInt(tr.children[5].textContent);
+		const bullet  = parseInt(tr.children[6].textContent);
+		const energy  = tr.children[7];
+		const autolvc = tr.children[8];
+		const dps     = tr.children[9];
 		
 		const calc = (lv_) => {
 			const lvup       = Math.ceil(power * 0.02 * lv_);
@@ -508,7 +511,7 @@ const kikan = () => {
 			}
 			else
 			{
-				const energy0  = parseInt(energy.attr("data-energy")) + Math.floor(powerup / 500);
+				const energy0  = parseInt(energy.dataset.energy) + Math.floor(powerup / 500);
 				const energyp  = energy0 - Math.floor(energy0 / 100 * energy1) - (energy1 < 99 || energy2 == 0 ? 0 : Math.floor((energy0 - Math.floor(energy0 / 100 * energy1)) / 100 * Math.max(1, Math.floor(energy2 / 10))));
 				const energyps = energyp * shotnum;
 				
@@ -587,24 +590,24 @@ const kikan = () => {
 				}
 			}
 			
-			energy.text(minmax.energyp.toLocaleString());
-			autolvc.text(minmax.max.toLocaleString());
-			dps.text(minmax.maxp.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+			energy.textContent  = minmax.energyp.toLocaleString();
+			autolvc.textContent = minmax.max.toLocaleString();
+			dps.textContent     = minmax.maxp.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 		}
 		else
 		{
 			const v = calc(lv);
 			
-			energy.text(v.energyp.toLocaleString());
-			autolvc.text(lv.toLocaleString());
-			dps.text(v.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+			energy.textContent  = v.energyp.toLocaleString();
+			autolvc.textContent = lv.toLocaleString();
+			dps.textContent     = v.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 		}
 		
-		const name_v = name.text();
-		const name_a = $(`<a>${ name_v }</a>`);
-		name_a.on("click", () => {
-			dialogin.empty();
-			const table = $(`
+		const name_v = name.textContent;
+		const name_a = Dom.create("a", {}, name_v);
+		name_a.onclick = () => {
+			while(dialogin.firstChild) dialogin.removeChild(dialogin.firstChild);
+			const table = Dom.from_html(`
 				<table>
 					<thead>
 					<th>Lv</th>
@@ -614,42 +617,46 @@ const kikan = () => {
 					</thead>
 					<tbody></tbody>
 				</table>`);
-			table.children("tbody").append(Array.from(Array(lv), (_, i) => {
+			const tbody = table.querySelector("tbody");
+			Array.from(Array(lv), (_, i) => {
 				const v = calc(i + 1);
-				return($(`
-					<tr>
+				return(Dom.from_html(`
+					<table><tbody><tr>
 						<td style="text-align: right">${ i + 1 }</td>
 						<td style="text-align: right">${ v.energyp.toLocaleString() }</td>
 						<td style="text-align: right">${ v.shotp.toLocaleString() }</td>
 						<td style="text-align: right">${ v.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) }</td>
-					</tr>`));
-				}));
-			table.tablesorter();
-			dialogin.append(table);
-			dialog.scrollTop(0);
-			dialog[0].showModal();
-			$("body").css("overflow", "hidden");
-		});
-		name.empty();
-		name.append(name_a);
+					</tr></tbody></table>`).childNodes[0].childNodes[0]);
+				})
+				.forEach(x => tbody.appendChild(x));
+			TableSort.attach(table);
+			dialogin.appendChild(table);
+			dialog.scrollTo(0, 0);
+			dialog.showModal();
+			document.body.style.overflow = "hidden";
+		};
+		while(name.firstChild) name.removeChild(name.firstChild);
+		name.appendChild(name_a);
 		
-		$(tr).css("display", (((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type == "主砲" && main) || (type == "副砲" && sub) || (type == "弾幕" && barrage)) ? "" : "none"));
+		tr.classList.toggle("none", !(((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type == "主砲" && main) || (type == "副砲" && sub) || (type == "弾幕" && barrage))));
 	});
 	
-	$(
+	document.querySelectorAll(
 		"label[for=mag1], input#mag1," +
 		"label[for=mag2], input#mag2," +
-		"label[for=procurement], input#procurement").toggle(outofammo);
-	$(
+		"label[for=procurement], input#procurement").forEach(x => x.classList.toggle("none", !outofammo));
+	document.querySelectorAll(
 		"label[for=energy1], input#energy1," +
 		"label[for=energy2], input#energy2," +
 		"label[for=barrier], input#barrier," +
 		"label[for=barrierregene], input#barrierregene," +
-		"table thead tr th:nth-child(8), table tbody tr td:nth-child(8)").toggle(outofenergy);
-	$("table thead tr th:nth-child(3), table tbody tr td:nth-child(3)").toggle(remarks);
-	$("table thead tr th:nth-child(9), table tbody tr td:nth-child(9)").toggle(autolv);
-	$("table").trigger("update");
+		"table thead tr th:nth-child(8), table tbody tr td:nth-child(8)").forEach(x => x.classList.toggle("none", !outofenergy));
+	document.querySelectorAll("table thead tr th:nth-child(3), table tbody tr td:nth-child(3)").forEach(x => x.classList.toggle("none", !remarks));
+	document.querySelectorAll("table thead tr th:nth-child(9), table tbody tr td:nth-child(9)").forEach(x => x.classList.toggle("none", !autolv));
+	document.querySelector("table").dispatchEvent(new Event("update"));
 };
-$("table tbody tr td:nth-child(8)").each((_, td) => $(td).attr("data-energy", $(td).text()));
+document.querySelectorAll("table tbody tr td:nth-child(8)").forEach(td => td.dataset.energy = td.textContent);
 kikan();
+
+window.kikan = kikan;
 </script>

@@ -219,7 +219,7 @@
 | 智天型空母マザーメタトロン         | 超重力子榴砲                   |      0 |       0 | 光子追尾レーザー       |      0 |       0 | 対空レーザーλ         |      0 |       0 |     0 |
 | アーク・ノヴァ級参番艦アレクシオン | トライHi光子砲                 |      0 |       0 | Mk12連装ロケット       |      0 |       0 | 強化パールレーザー改   |      0 |       0 |     0 |
 
-<script>
+<script type="module">
 const stepover100 = (lv) => {
 	var a = Math.floor(lv / 100);
 	var b = lv % 100;
@@ -227,19 +227,19 @@ const stepover100 = (lv) => {
 };
 const weapons = {};
 const ryoukan = () => {
-	const lv          = parseInt($("#lv2").val());
-	const status      = stepover100(parseInt($("#status2").val()));
-	const kansyu      = parseInt($("#kansyu2").val());
-	const over        = parseInt($("#over2").val()) + 10000;
-	const pcut        = parseFloat($("#pcut2").val());
-	const ecut        = parseFloat($("#ecut2").val());
-	const mainloading = parseInt($("#mainloading").val());
-	const subloading  = parseInt($("#subloading").val());
-	const main        = $("#main2").prop("checked");
-	const sub         = $("#sub2").prop("checked");
-	const barrage     = $("#barrage2").prop("checked");
-	const every_dps   = $("#every-dps2").prop("checked");
-	const autolv      = $("#autolv2").prop("checked");
+	const lv          = parseInt(document.getElementById("lv2").value);
+	const status      = stepover100(parseInt(document.getElementById("status2").value));
+	const kansyu      = parseInt(document.getElementById("kansyu2").value);
+	const over        = parseInt(document.getElementById("over2").value) + 10000;
+	const pcut        = parseFloat(document.getElementById("pcut2").value);
+	const ecut        = parseFloat(document.getElementById("ecut2").value);
+	const mainloading = parseInt(document.getElementById("mainloading").value);
+	const subloading  = parseInt(document.getElementById("subloading").value);
+	const main        = document.getElementById("main2").checked;
+	const sub         = document.getElementById("sub2").checked;
+	const barrage     = document.getElementById("barrage2").checked;
+	const every_dps   = document.getElementById("every-dps2").checked;
+	const autolv      = document.getElementById("autolv2").checked;
 		
 	const calc = (weapon, lv_) => {
 		const lvup    = Math.ceil(weapon.power * 0.02 * lv_);
@@ -289,73 +289,77 @@ const ryoukan = () => {
 					minmax.max  = minmax.min;
 					minmax.maxp = minmax.minp;
 				}
-				lvtd.text(minmax.max.toLocaleString());
-				dpstd.text(minmax.maxp.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+				lvtd.textContent  = minmax.max.toLocaleString();
+				dpstd.textContent = minmax.maxp.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 				return(minmax.maxp);
 			}
 			else
 			{
 				const v = calc(weapons[weapon], lv);
-				lvtd.text(lv.toLocaleString());
-				dpstd.text(v.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+				lvtd.textContent  = lv.toLocaleString();
+				dpstd.textContent = v.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 				return(v);
 			}
 		}
 		else
 		{
-			lvtd.text("0");
-			dpstd.text("0.00");
+			lvtd.textContent  = "0";
+			dpstd.textContent = "0.00";
 			return(0);
 		}
 	};
 	
-	$("table tbody tr").each((_, tr) => {
-		const mainweapon    = $(tr.children[1]).text();
-		const mainlv        = $(tr.children[2]);
-		const maindps       = $(tr.children[3]);
-		const subweapon     = $(tr.children[4]).text();
-		const sublv         = $(tr.children[5]);
-		const subdps        = $(tr.children[6]);
-		const barrageweapon = $(tr.children[7]).text();
-		const barragelv     = $(tr.children[8]);
-		const barragedps    = $(tr.children[9]);
-		const totaldps      = $(tr.children[10]);
+	document.querySelectorAll("table tbody tr").forEach(tr => {
+		const mainweapon    = tr.children[1].textContent;
+		const mainlv        = tr.children[2];
+		const maindps       = tr.children[3];
+		const subweapon     = tr.children[4].textContent;
+		const sublv         = tr.children[5];
+		const subdps        = tr.children[6];
+		const barrageweapon = tr.children[7].textContent;
+		const barragelv     = tr.children[8];
+		const barragedps    = tr.children[9];
+		const totaldps      = tr.children[10];
 		
 		const total =
 			display(mainweapon,    mainlv,    maindps) + 
 			display(subweapon,     sublv,     subdps)  + 
 			display(barrageweapon, barragelv, barragedps);
 		
-		totaldps.text(total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+		totaldps.textContent = total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 	});
 	
-	$("table thead tr th:nth-child(2),  table tbody tr td:nth-child(2)").toggle(main);
-	$("table thead tr th:nth-child(3),  table tbody tr td:nth-child(3)").toggle(main && autolv);
-	$("table thead tr th:nth-child(4),  table tbody tr td:nth-child(4)").toggle(main && every_dps);
-	$("table thead tr th:nth-child(5),  table tbody tr td:nth-child(5)").toggle(sub);
-	$("table thead tr th:nth-child(6),  table tbody tr td:nth-child(6)").toggle(sub && autolv);
-	$("table thead tr th:nth-child(7),  table tbody tr td:nth-child(7)").toggle(sub && every_dps);
-	$("table thead tr th:nth-child(8),  table tbody tr td:nth-child(8)").toggle(barrage);
-	$("table thead tr th:nth-child(9),  table tbody tr td:nth-child(9)").toggle(barrage && autolv);
-	$("table thead tr th:nth-child(10), table tbody tr td:nth-child(10)").toggle(barrage && every_dps);
-	$("table").trigger("update");
+	document.querySelectorAll("table thead tr th:nth-child(2),  table tbody tr td:nth-child(2)").forEach(x => x.classList.toggle("none", !main));
+	document.querySelectorAll("table thead tr th:nth-child(3),  table tbody tr td:nth-child(3)").forEach(x => x.classList.toggle("none", !(main && autolv)));
+	document.querySelectorAll("table thead tr th:nth-child(4),  table tbody tr td:nth-child(4)").forEach(x => x.classList.toggle("none", !(main && every_dps)));
+	document.querySelectorAll("table thead tr th:nth-child(5),  table tbody tr td:nth-child(5)").forEach(x => x.classList.toggle("none", !sub));
+	document.querySelectorAll("table thead tr th:nth-child(6),  table tbody tr td:nth-child(6)").forEach(x => x.classList.toggle("none", !(sub && autolv)));
+	document.querySelectorAll("table thead tr th:nth-child(7),  table tbody tr td:nth-child(7)").forEach(x => x.classList.toggle("none", !(sub && every_dps)));
+	document.querySelectorAll("table thead tr th:nth-child(8),  table tbody tr td:nth-child(8)").forEach(x => x.classList.toggle("none", !barrage));
+	document.querySelectorAll("table thead tr th:nth-child(9),  table tbody tr td:nth-child(9)").forEach(x => x.classList.toggle("none", !(barrage && autolv)));
+	document.querySelectorAll("table thead tr th:nth-child(10), table tbody tr td:nth-child(10)").forEach(x => x.classList.toggle("none", !(barrage && every_dps)));
+	document.querySelector("table").dispatchEvent(new Event("update"));
 };
-$.ajax({type: "GET", dataType: "text", url: "https://raw.githubusercontent.com/zenuas/ssrpg/master/docs/%E6%97%97%E8%89%A6DPS.md"})
-.then((text) => {
-	const lines = text.split(/\r\n?|\n/);
-	$.each($.grep(lines, (s) => s.startsWith("|")), (_, s) => {
-		const xs = $.map(s.split("|"), (v) => v.trim()).splice(1);
-		weapons[xs[1]] = {
-			type:    xs[0],
-			name:    xs[1],
-			message: xs[2],
-			power:   parseInt(xs[3]),
-			time:    parseFloat(xs[4]),
-			shotnum: parseInt(xs[5]),
-			bullet:  parseInt(xs[6]),
-			energy:  parseInt(xs[7])
-		};
-	});
+
+window.addEventListener("load", async () => {
+	(await (await fetch("https://raw.githubusercontent.com/zenuas/ssrpg/master/docs/%E6%97%97%E8%89%A6DPS.md")).text())
+		.split(/\r\n?|\n/)
+		.filter(s => s.startsWith("|"))
+		.forEach(s => {
+			const xs = s.split("|").map(v => v.trim()).splice(1);
+			weapons[xs[1]] = {
+				type:    xs[0],
+				name:    xs[1],
+				message: xs[2],
+				power:   parseInt(xs[3]),
+				time:    parseFloat(xs[4]),
+				shotnum: parseInt(xs[5]),
+				bullet:  parseInt(xs[6]),
+				energy:  parseInt(xs[7])
+			};
+		});
 	ryoukan();
 });
+
+window.ryoukan = ryoukan;
 </script>

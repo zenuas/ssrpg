@@ -5,10 +5,7 @@
 
 {% seo %}
     <link rel="stylesheet" href="{{ '/assets/styles.css?v=' | append: site.github.build_revision | relative_url }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
-    <script src="{{ '/assets/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script type="module" src="{{ '/assets/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
     {% for scr in page.scripts %}
     {% if scr contains 'https://' %}
     <script src="{{ scr }}"></script>

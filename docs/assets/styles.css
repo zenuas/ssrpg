@@ -22,7 +22,6 @@ time, mark, audio, video
 	vertical-align: baseline;
 }
 
-
 /* Base text styles */
 
 body
@@ -149,6 +148,11 @@ hr
 	margin: 0 0 1.2em;
 }
 
+.none
+{
+	display: none !important;
+}
+
 /* Images */
 
 img
@@ -192,7 +196,6 @@ pre
 	white-space: pre-wrap;
 }
 
-
 /* Tables */
 
 table
@@ -217,7 +220,7 @@ td
 	background: #393A39;
 }
 
-.tablesorter-header
+.table-sort > thead > tr > th
 {
 	background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAAP///////yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
 	background-position: center right;
@@ -226,16 +229,15 @@ td
 	padding-right: 20px;
 }
 
-.tablesorter-headerAsc
+.table-sort > thead > tr > th[data-sort=asc]
 {
 	background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
 }
 
-.tablesorter-headerDesc
+.table-sort > thead > tr > th[data-sort=desc]
 {
 	background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
 }
-
 
 /* Form */
 
@@ -249,7 +251,6 @@ input[type=number]
 {
 	text-align: right;
 }
-
 
 /* Grid Layout */
 
@@ -277,7 +278,6 @@ input[type=number]
 {
 	grid-template-columns: auto 1fr;
 }
-
 
 /* Main Contents */
 
@@ -312,7 +312,6 @@ input[type=number]
 		flex-direction: column;
 	}
 }
-
 
 /* Header */
 
@@ -434,7 +433,6 @@ input.search:hover
 	background: #C3001D url(search.png) no-repeat left 3px center;
 }
 
-
 /* Navigation */
 
 nav
@@ -470,7 +468,6 @@ article
 	color: #B24E4A;
 }
 
-
 /* Footer */
 
 footer
@@ -481,8 +478,8 @@ footer
 	border-top: 1px solid #7C7468;
 }
 
-
 /* Dialog */
+
 dialog
 {
 	background-color: #5C5C5B;

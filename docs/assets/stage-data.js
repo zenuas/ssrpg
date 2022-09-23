@@ -1,5 +1,5 @@
 
-const stage_datas = {
+export const stage_datas = {
 	"月": [
 		{emax: 3, est: 4, esp: 1, dist: 30, bmo: 3, bex: 2, bpo: 3, zmo: 2, zex: 1, zpo: 3, znm: 1},
 		{emax: 5, est: 3.9, esp: 1, dist: 30, bmo: 6, bex: 3, bpo: 3, zmo: 5, zex: 3, zpo: 6, znm: 2},
