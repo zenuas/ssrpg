@@ -3059,13 +3059,9 @@ const config = {
         },
     },
 };
-$(window).on('load', function () {
+window.addEventListener('load', () => {
     const chart = new Chart(
         document.getElementById('chart'),
         config
     );
-    $('.main-contents article').css('width', '100%');
-});
-$(window).on('resize', function () {
-    $('#chart').width($('.main-contents article').width());
 });
