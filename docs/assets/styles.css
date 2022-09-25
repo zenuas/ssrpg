@@ -157,22 +157,7 @@ hr
 
 img
 {
-	position: relative;
-	margin: 0 auto;
-	max-width: 650px;
-	padding: 5px;
-	margin: 10px 0 32px 0;
 	border: 1px solid #CCCCCC;
-}
-
-p img, .emoji
-{
-	display: inline;
-	margin: 0;
-	padding: 0;
-	vertical-align: middle;
-	text-align: center;
-	border: none;
 }
 
 /* Code blocks */
