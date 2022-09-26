@@ -1,3 +1,5 @@
+"use strict";
+
 import * as Dom from "./dom.js";
 
 export const drop_datas = [

@@ -1,3 +1,4 @@
+"use strict";
 
 export const stage_datas = {
 	"月": [
