@@ -435,18 +435,8 @@ E兵器で消費Eがバリア回復を超える場合は`与ダメージ * 発�
 
 <script type="module">
 import * as TableSort from "./assets/table-sort.js";
-import * as Dom from "./assets/dom.js";
-
-const dialog   = Dom.from_html(`<dialog><aside></aside></dialog>`);
-const dialogin = dialog.querySelector("aside");
-dialog.onclick = e => {
-	if(e.target.closest("aside") === null)
-	{
-		dialog.close();
-		document.body.style.overflow = "auto";
-	}
-};
-document.body.appendChild(dialog);
+import * as Dom       from "./assets/dom.js";
+import * as Dialog    from "./assets/dialog.js";
 
 const stepover100 = (lv) => {
 	var a = Math.floor(lv / 100);
@@ -606,7 +596,6 @@ const kikan = () => {
 		const name_v = name.textContent;
 		const name_a = Dom.create("a", {}, name_v);
 		name_a.onclick = () => {
-			while(dialogin.firstChild) dialogin.removeChild(dialogin.firstChild);
 			const table = Dom.from_html(`
 				<table>
 					<thead>
@@ -630,10 +619,7 @@ const kikan = () => {
 				})
 				.forEach(x => tbody.appendChild(x));
 			TableSort.attach(table);
-			dialogin.appendChild(table);
-			dialog.scrollTo(0, 0);
-			dialog.showModal();
-			document.body.style.overflow = "hidden";
+			Dialog.show_modal(table);
 		};
 		while(name.firstChild) name.removeChild(name.firstChild);
 		name.appendChild(name_a);
