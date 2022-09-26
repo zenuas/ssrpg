@@ -1,3 +1,4 @@
+import * as Dom from "./dom.js";
 
 export const drop_datas = [
 	{main: "壊れかけのカノン砲",             sum: "Mk1ロケット",            bar:"壊れかけの機銃座",       gen: "軽燃料炉C",       print: "試作宇宙戦艦",                       enemy: "",                                   area: "初期",                       stage: ""},
@@ -1409,3 +1410,36 @@ export const drop_datas = [
 	{main: "なし",                           sum: "真・メタルソード",       bar:"なし",                   gen: "軽燃料炉F",       print: "メタルSF",                           enemy: "真・メタルSF",                       area: "レア",                       stage: "(覚醒者)"},
 	{main: "なし",                           sum: "幻・メタルソード",       bar:"なし",                   gen: "軽燃料炉G",       print: "メタルSF",                           enemy: "幻・メタルSF",                       area: "レア",                       stage: "(光化以上)"},
 ];
+
+export function table_col_visible(table, visible, cols)
+{
+	const s = cols
+		.map(col => `thead th:nth-child(${ col }), tbody tr td:nth-child(${ col })`)
+		.join(", ");
+	
+	table.querySelectorAll(s).forEach(x => x.classList.toggle("none", !visible));
+}
+
+export function append_drop_area(table, type_name, text_col, area_col)
+{
+	table.querySelectorAll("tbody tr").forEach(tr => {
+		const name = tr.children[text_col].textContent;
+		while(tr.children[area_col].firstChild) tr.children[area_col].removeChild(tr.children[area_col].firstChild);
+		
+		const drop = drop_datas
+			.filter(x => x[type_name] == name);
+		
+		const drop_key  = {};
+		const drop_area = [];
+		drop
+			.forEach(x => {
+				if(x.area in drop_key) return;
+				drop_key[x.area] = true;
+				drop_area.push(x.enemy == "" || x.area == "レア" ? document.createTextNode(x.area) : Dom.create("a", {href: `./${ x.area }.html`}, x.area));
+			});
+		drop_area.forEach((x, i) => {
+			if(i > 0) tr.children[area_col].appendChild(document.createTextNode("、"));
+			tr.children[area_col].appendChild(x);
+		});
+	});
+}
