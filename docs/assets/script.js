@@ -2,23 +2,15 @@
 
 import Cookies from "https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.mjs";
 import * as TableSort from "./table-sort.js";
-import * as Dom from "./dom.js";
-
-function table_col_visible(table, visible, cols)
-{
-	const s = cols
-		.map(col => `thead th:nth-child(${ col }), tbody tr td:nth-child(${ col })`)
-		.join(", ");
-	
-	table.querySelectorAll(s).forEach(x => x.classList.toggle("none", !visible));
-}
+import * as Dom       from "./dom.js";
+import * as Table     from "./table.js";
 
 window.addEventListener("load", () => {
 	document.querySelectorAll(".enemies-list").forEach(list => {
 		list.classList.add("commands");
 		const table = list.nextSibling.nextSibling;
 		const isbattle = list.classList.contains("rank-battle");
-		table_col_visible(table, false, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
+		Table.col_visible(table, false, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
 		
 		const parts = [
 			{name: "主砲", pushed: true},
@@ -45,9 +37,9 @@ window.addEventListener("load", () => {
 			const barrage_visible = parts.filter(x => x.name.startsWith("弾幕") && x.pushed).length > 0;
 			
 			opts.filter(x => x.name.startsWith("武装")).forEach(x => {
-				table_col_visible(table, x.pushed && main_visible,    [x.columns[0]]);
-				table_col_visible(table, x.pushed && sub_visible,     [x.columns[1]]);
-				table_col_visible(table, x.pushed && barrage_visible, [x.columns[2]]);
+				Table.col_visible(table, x.pushed && main_visible,    [x.columns[0]]);
+				Table.col_visible(table, x.pushed && sub_visible,     [x.columns[1]]);
+				Table.col_visible(table, x.pushed && barrage_visible, [x.columns[2]]);
 			});
 			
 			const hidden = opts.filter(x => (x.name == "武装威力" || x.name == "装甲" || x.name == "資金功績救出") && x.pushed).length == 0;
@@ -81,7 +73,7 @@ window.addEventListener("load", () => {
 				li.appendChild(a);
 				a.appendChild(v);
 				a.onclick = () => {
-					table_col_visible(table, !opt.pushed, opt.columns);
+					Table.col_visible(table, !opt.pushed, opt.columns);
 					opt.pushed = !opt.pushed;
 					v.textContent = opt.pushed ? "非表示" : "表示";
 					li.classList.remove("pushed");

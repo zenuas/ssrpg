@@ -1413,15 +1413,6 @@ export const drop_datas = [
 	{main: "なし",                           sub: "幻・メタルソード",       bar:"なし",                   gen: "軽燃料炉G",       print: "メタルSF",                           enemy: "幻・メタルSF",                       area: "レア",                       stage: "(光化以上)"},
 ];
 
-export function table_col_visible(table, visible, cols)
-{
-	const s = cols
-		.map(col => `thead th:nth-child(${ col }), tbody tr td:nth-child(${ col })`)
-		.join(", ");
-	
-	table.querySelectorAll(s).forEach(x => x.classList.toggle("none", !visible));
-}
-
 export function append_drop_area(table, type_names, text_col, area_col)
 {
 	table.querySelectorAll("tbody tr").forEach(tr => {
