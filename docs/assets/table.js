@@ -17,6 +17,6 @@ export function row_filter(table, visible, f)
 	
 	const s = Array.from(trs)
 		.map((row, i) => ({row: row, index: i}))
-		.filter(x => f(x.row, x.index))
-		.forEach(x => x.row.classList.toggle("none", !visible));
+		.filter(x => !f(x.row, x.index))
+		.forEach(x => x.row.classList.add("none"));
 }
