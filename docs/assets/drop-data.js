@@ -1417,7 +1417,7 @@ export function append_drop_area(table, type_names, text_col, area_col)
 {
 	table.querySelectorAll("tbody tr").forEach(tr => {
 		const name = tr.children[text_col].textContent;
-		while(tr.children[area_col].firstChild) tr.children[area_col].removeChild(tr.children[area_col].firstChild);
+		Dom.removeChildAll(tr.children[area_col]);
 		
 		const drop = drop_datas
 			.filter(x => type_names.findIndex(y => x[y] == name) >= 0);

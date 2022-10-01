@@ -624,7 +624,7 @@ const kikan = () => {
 			TableSort.attach(table);
 			Dialog.show_modal(table);
 		};
-		while(name.firstChild) name.removeChild(name.firstChild);
+		Dom.removeChildAll(name);
 		name.appendChild(name_a);
 		
 		tr.classList.toggle("none", !(((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type == "主砲" && main) || (type == "副砲" && sub) || (type == "弾幕" && barrage))));

@@ -1,5 +1,7 @@
 "use strict";
 
+import * as Dom from "./dom.js";
+
 export function attach(table)
 {
 	const ths = table.querySelectorAll(":scope > thead > tr > th");
@@ -33,7 +35,7 @@ function sort(table, index, asc)
 	
 	const sorted = trs.sort((a, b) => compare(a.value, b.value));
 	
-	while(tbody.firstChild) tbody.removeChild(tbody.firstChild);
+	Dom.removeChildAll(tbody);
 	(asc ? sorted : sorted.reverse()).forEach(x => tbody.appendChild(x.tr));
 }
 

@@ -19,3 +19,8 @@ export function from_html(html)
 	const dom = (new DOMParser()).parseFromString(html, "text/html");
 	return(dom.body.childNodes[0]);
 }
+
+export function removeChildAll(v)
+{
+	while(v.firstChild) v.removeChild(v.firstChild);
+}
