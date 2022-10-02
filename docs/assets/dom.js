@@ -16,8 +16,27 @@ export function create(tag, option, text)
 
 export function from_html(html)
 {
+	return(from_htmls(html)[0]);
+}
+
+export function from_htmls(html)
+{
 	const dom = (new DOMParser()).parseFromString(html, "text/html");
-	return(dom.body.childNodes[0]);
+	return(dom.body.childNodes);
+}
+
+export function appendChildAll(v, xs)
+{
+	if(Array.isArray(xs) ||
+		NodeList.prototype.isPrototypeOf(xs) ||
+		HTMLCollection.prototype.isPrototypeOf(xs))
+	{
+		Array.from(xs).forEach(x => v.appendChild(x));
+	}
+	else
+	{
+		v.appendChild(xs);
+	}
 }
 
 export function removeChildAll(v)
