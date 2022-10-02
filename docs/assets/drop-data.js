@@ -1,6 +1,8 @@
 "use strict";
 
-import * as Dom from "./dom.js";
+import * as Dom       from "./dom.js";
+import * as Dialog    from "./dialog.js";
+import * as TableSort from "./table-sort.js";
 
 export const drop_datas = [
 	{main: "壊れかけのカノン砲",             sub: "Mk1ロケット",            bar:"壊れかけの機銃座",       gen: "軽燃料炉C",       print: "試作宇宙戦艦",                       enemy: "",                                   area: "初期",                       stage: ""},
@@ -1430,6 +1432,20 @@ export function append_drop_area(table, type_names, text_col, area_col)
 				drop_key[x.area] = true;
 				drop_area.push(x.enemy == "" || x.area == "レア" ? document.createTextNode(x.area) : Dom.create("a", {href: `./${ x.area }.html`}, x.area));
 			});
+		if(drop_area.length > 0)
+		{
+			drop_area.push(Dom.create("a", {onclick: () => {
+				const table = Dom.from_html(
+						"<table><thead><th>ドロップ宙域</th><th>機体名</th><th>登場ステージ</th></thead><tbody>" +
+						(drop
+							.map(x => `<tr><td>${ x.area }</td><td>${ x.enemy }</td><td>${ x.stage }</td></tr>`)
+							.join("")) +
+						"</tbody></table>"
+					);
+				TableSort.attach(table);
+				Dialog.show_modal(table);
+			}}, "🔍"));
+		}
 		drop_area.forEach((x, i) => {
 			if(i > 0) tr.children[area_col].appendChild(document.createTextNode("、"));
 			tr.children[area_col].appendChild(x);
