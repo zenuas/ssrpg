@@ -16,6 +16,6 @@ export function show_modal(dom)
 	};
 	document.body.appendChild(dialog);
 	document.body.style.overflow = "hidden";
-	dialogin.appendChild(dom);
+	Dom.appendChildAll(dialogin, dom);
 	dialog.showModal();
 }
