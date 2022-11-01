@@ -190,6 +190,21 @@ table
 	text-align: left;
 }
 
+/*
+tr th:first-child,
+tr td:first-child
+{
+	position: sticky;
+	left: 0;
+	z-index: 2;
+}
+
+tr td:first-child
+{
+	z-index: 1;
+}
+*/
+
 th
 {
 	padding: 0.4em;
@@ -197,6 +212,8 @@ th
 	color: #FDFEFB;
 	top: 0;
 	position: sticky;
+	--z-index: 1;
+	white-space: nowrap;
 }
 
 td
