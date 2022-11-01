@@ -212,8 +212,7 @@ th
 	color: #FDFEFB;
 	top: 0;
 	position: sticky;
-	--z-index: 1;
-	white-space: nowrap;
+	/* z-index: 1; */
 }
 
 td
