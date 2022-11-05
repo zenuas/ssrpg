@@ -47,12 +47,25 @@ export function compare(a, b)
 		if(i >= s.length || s[i] < "0" || s[i] > "9") return({isnumeric: false});
 		
 		let value = 0;
+		let point = 0;
 		while(i < s.length)
 		{
-			if(s[i] != ",")
+			if(s[i] == ".")
+			{
+				point = 1;
+			}
+			else if(s[i] != ",")
 			{
 				if(s[i] < "0" || s[i] > "9") break;
-				value = value * 10 + (s.charCodeAt(i) - "0".charCodeAt(0));
+				if(point > 0)
+				{
+					value += (s.charCodeAt(i) - "0".charCodeAt(0)) * Math.pow(10, -point);
+					point++;
+				}
+				else
+				{
+					value = value * 10 + (s.charCodeAt(i) - "0".charCodeAt(0));
+				}
 			}
 			i++;
 		}
