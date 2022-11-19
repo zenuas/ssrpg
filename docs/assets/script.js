@@ -213,6 +213,29 @@ window.addEventListener("load", () => {
 		details.addEventListener("toggle", () => Cookies.set(id, details.open ? "open" : "close", { expires: 7 }));
 	});
 	
+	const input_set_value = (input, value) => {
+		if(input.type == "checkbox" || input.type == "radio")
+		{
+			input.checked = value == "true";
+		}
+		else
+		{
+			input.value = value;
+		}
+		input.dispatchEvent(new Event("input",  {bubbles: true, cancelable: true}));
+		input.dispatchEvent(new Event("change", {bubbles: true, cancelable: true}));
+	};
+	
+	const url = (new URL(window.location.href)).searchParams;
+	document.querySelectorAll("input[data-auto-param], select[data-auto-param], textarea[data-auto-param]").forEach(input => {
+		const id    = input.dataset.autoParam;
+		const param = url.get(id);
+		if(param != null)
+		{
+			input_set_value(input, param);
+		}
+	});
+	
 	document.querySelectorAll("input[data-auto-cookie], select[data-auto-cookie], textarea[data-auto-cookie]").forEach(input => {
 		const id    = "data-auto-cookie" + (
 			input.dataset.autoCookie != undefined && input.dataset.autoCookie != "" ? input.dataset.autoCookie :
@@ -222,16 +245,7 @@ window.addEventListener("load", () => {
 		const value = Cookies.get(id);
 		if(value != undefined && value != "")
 		{
-			if(input.type == "checkbox" || input.type == "radio")
-			{
-				input.checked = value == "true";
-			}
-			else
-			{
-				input.value = value;
-			}
-			input.dispatchEvent(new Event("input",  {bubbles: true, cancelable: true}));
-			input.dispatchEvent(new Event("change", {bubbles: true, cancelable: true}));
+			input_set_value(input, value);
 		}
 		
 		if(input.type == "checkbox" || input.type == "radio")
