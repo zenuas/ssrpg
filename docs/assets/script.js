@@ -206,8 +206,8 @@ window.addEventListener("load", () => {
 	
 	document.querySelectorAll("table:not(.table-sort)").forEach(x => TableSort.attach(x));
 	
-	document.querySelectorAll("details[id^=details-cookie-]").forEach(details => {
-		const id    = details.id;
+	document.querySelectorAll("details[data-auto-cookie]").forEach(details => {
+		const id    = details.dataset.autoCookie;
 		const value = Cookies.get(id);
 		if(value == "close") details.open = false;
 		details.addEventListener("toggle", () => Cookies.set(id, details.open ? "open" : "close", { expires: 7 }));
