@@ -295,6 +295,11 @@ input[type=number]
 		justify-content: start;
 	}
 	
+	article
+	{
+		flex-grow: 1;
+	}
+	
 	nav
 	{
 		top: 0;
