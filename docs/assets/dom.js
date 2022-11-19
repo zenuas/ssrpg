@@ -37,9 +37,11 @@ export function appendChildAll(v, xs)
 	{
 		v.appendChild(xs);
 	}
+	return(v);
 }
 
 export function removeChildAll(v)
 {
 	while(v.firstChild) v.removeChild(v.firstChild);
+	return(v);
 }
