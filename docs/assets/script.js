@@ -202,6 +202,34 @@ window.addEventListener("load", () => {
 				return li;
 			})
 			.forEach(x => calculation_list.appendChild(x));
+		
+		table.querySelectorAll("tbody tr td:nth-child(1)").forEach(td => {
+			const name_v = td.textContent;
+			const name_a = Dom.create("a", {target: "_blank", href: "%E6%95%B5%E8%89%A6%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
+			Dom.removeChildAll(td);
+			td.appendChild(name_a);
+		});
+		table.querySelectorAll("tbody tr td:nth-child(2), tbody tr td:nth-child(3), tbody tr td:nth-child(4)").forEach(td => {
+			const name_v = td.textContent;
+			const name   = name_v.replace(/\(.+\)/, "");
+			if(name == "なし" || name == "搭載不可") return;
+			const name_a = Dom.create("a", {target: "_blank", href: "%E6%AD%A6%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name)}, name);
+			Dom.removeChildAll(td);
+			td.appendChild(name_a);
+			if(name_v != name) td.appendChild(document.createTextNode(name_v.substring(name.length)));
+		});
+		table.querySelectorAll("tbody tr td:nth-child(17)").forEach(td => {
+			const name_v = td.textContent;
+			const name_a = Dom.create("a", {target: "_blank", href: "%E6%A9%9F%E9%96%A2%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
+			Dom.removeChildAll(td);
+			td.appendChild(name_a);
+		});
+		table.querySelectorAll("tbody tr td:nth-child(18)").forEach(td => {
+			const name_v = td.textContent;
+			const name_a = Dom.create("a", {target: "_blank", href: "%E6%88%A6%E8%89%A6%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
+			Dom.removeChildAll(td);
+			td.appendChild(name_a);
+		});
 	});
 	
 	document.querySelectorAll("table:not(.table-sort)").forEach(x => TableSort.attach(x));

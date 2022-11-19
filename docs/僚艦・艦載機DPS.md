@@ -217,6 +217,8 @@
 | アーク・ノヴァ級参番艦アレクシオン | トライHi光子砲                 |      0 |       0 | Mk12連装ロケット       |      0 |       0 | 強化パールレーザー改   |      0 |       0 |     0 |
 
 <script type="module">
+import * as Dom from "./assets/dom.js";
+
 const stepover100 = (lv) => {
 	var a = Math.floor(lv / 100);
 	var b = lv % 100;
@@ -358,5 +360,18 @@ window.addEventListener("load", async () => {
 	ryoukan();
 });
 
+document.querySelectorAll("table tbody tr td:nth-child(1)").forEach(td => {
+	const name_v = td.textContent;
+	const name_a = Dom.create("a", {target: "_blank", href: "%E6%88%A6%E8%89%A6%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
+	Dom.removeChildAll(td);
+	td.appendChild(name_a);
+});
+document.querySelectorAll("table tbody tr td:nth-child(2), table tbody tr td:nth-child(5), table tbody tr td:nth-child(8)").forEach(td => {
+	const name_v = td.textContent;
+	if(name_v == "なし" || name_v == "搭載不可") return;
+	const name_a = Dom.create("a", {target: "_blank", href: "%E6%AD%A6%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
+	Dom.removeChildAll(td);
+	td.appendChild(name_a);
+});
 window.ryoukan = ryoukan;
 </script>

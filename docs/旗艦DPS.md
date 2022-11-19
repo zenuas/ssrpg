@@ -474,8 +474,7 @@ const kikan = () => {
 	const autolv        = document.getElementById("autolv").checked;
 	
 	document.querySelectorAll("table tbody tr").forEach(tr => {
-		const type    = tr.children[0].textContent;
-		const name    = tr.children[1];
+		const type    = tr.children[0];
 		const message = tr.children[2].textContent;
 		const power   = parseInt(tr.children[3].textContent);
 		const time    = parseFloat(tr.children[4].textContent);
@@ -596,9 +595,9 @@ const kikan = () => {
 			dps.textContent     = v.result.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
 		}
 		
-		const name_v = name.textContent;
-		const name_a = Dom.create("a", {}, name_v);
-		name_a.onclick = () => {
+		const type_v = type.textContent;
+		const type_a = Dom.create("a", {}, type_v);
+		type_a.onclick = () => {
 			const table = Dom.from_html(`
 				<table>
 					<thead>
@@ -624,10 +623,10 @@ const kikan = () => {
 			TableSort.attach(table);
 			Dialog.show_modal(table);
 		};
-		Dom.removeChildAll(name);
-		name.appendChild(name_a);
+		Dom.removeChildAll(type);
+		type.appendChild(type_a);
 		
-		tr.classList.toggle("none", !(((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type == "主砲" && main) || (type == "副砲" && sub) || (type == "弾幕" && barrage))));
+		tr.classList.toggle("none", !(((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type_v == "主砲" && main) || (type_v == "副砲" && sub) || (type_v == "弾幕" && barrage))));
 	});
 	
 	document.querySelectorAll(
@@ -645,6 +644,12 @@ const kikan = () => {
 	document.querySelector("table").dispatchEvent(new Event("update"));
 };
 document.querySelectorAll("table tbody tr td:nth-child(8)").forEach(td => td.dataset.energy = td.textContent);
+document.querySelectorAll("table tbody tr td:nth-child(2)").forEach(td => {
+	const name_v = td.textContent;
+	const name_a = Dom.create("a", {target: "_blank", href: "%E6%AD%A6%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
+	Dom.removeChildAll(td);
+	td.appendChild(name_a);
+});
 kikan();
 
 window.kikan = kikan;
