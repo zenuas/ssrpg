@@ -160,6 +160,15 @@ img
 	border: 1px solid #CCCCCC;
 }
 
+@media only screen and (max-width: 1024px)
+{
+	img
+	{
+		max-width: 90vw;
+		object-fit: scale-down;
+	}
+}
+
 /* Code blocks */
 
 code, pre
