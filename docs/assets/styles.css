@@ -205,7 +205,6 @@ tr td:first-child
 	position: sticky;
 	left: 0;
 	z-index: 2;
-	white-space: nowrap;
 }
 
 tr td:first-child
@@ -247,6 +246,17 @@ td
 .table-sort > thead > tr > th[data-sort=desc]
 {
 	background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+}
+
+@media only screen and (max-width: 1024px)
+{
+	table
+	{
+		max-width: 95vw;
+		max-height: 75vh;
+		display: block;
+		overflow: scroll;
+	}
 }
 
 /* Form */
