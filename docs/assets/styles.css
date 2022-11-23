@@ -199,15 +199,30 @@ table
 	text-align: left;
 }
 
-tr th:first-child,
-tr td:first-child
+table:not([sticky-column]) tr th:first-child,
+table:not([sticky-column]) tr td:first-child,
+table[sticky-column="1"]   tr th:nth-child(1),
+table[sticky-column="1"]   tr td:nth-child(1),
+table[sticky-column="2"]   tr th:nth-child(2),
+table[sticky-column="2"]   tr td:nth-child(2),
+table[sticky-column="3"]   tr th:nth-child(3),
+table[sticky-column="3"]   tr td:nth-child(3),
+table[sticky-column="4"]   tr th:nth-child(4),
+table[sticky-column="4"]   tr td:nth-child(4),
+table[sticky-column="5"]   tr th:nth-child(5),
+table[sticky-column="5"]   tr td:nth-child(5)
 {
 	position: sticky;
 	left: 0;
 	z-index: 2;
 }
 
-tr td:first-child
+table:not([sticky-column]) tr td:first-child,
+table[sticky-column="1"]   tr td:nth-child(1),
+table[sticky-column="2"]   tr td:nth-child(2),
+table[sticky-column="3"]   tr td:nth-child(3),
+table[sticky-column="4"]   tr td:nth-child(4),
+table[sticky-column="5"]   tr td:nth-child(5)
 {
 	z-index: 1;
 }
