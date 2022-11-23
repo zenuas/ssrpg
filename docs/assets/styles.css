@@ -518,3 +518,13 @@ dialog::backdrop
 {
 	background-color: rgba(0, 0, 0, 0.4);
 }
+
+/* Embed */
+
+iframe[title="YouTube video player"]
+{
+	max-width: 90vw;
+	width: 560px;
+	height: auto;
+	aspect-ratio: 16 / 9;
+}
