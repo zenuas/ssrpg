@@ -9,36 +9,36 @@
 <form action="#" method="get" class="inline-grid grid2-auto-fr" oninput="ryoukan()">
 
 <label for="lv2">武装Lv</label>
-<input type="number" id="lv2" value="0" min="0" max="999999" step="1" data-auto-cookie required />
+<input type="number" id="lv2" value="0" min="0" max="999999" step="1" data-auto-cookie required>
 
 <label for="status2">攻撃司令Lv</label>
-<input type="number" id="status2" value="9999" min="0" max="9999" step="1" data-auto-cookie required />
+<input type="number" id="status2" value="9999" min="0" max="9999" step="1" data-auto-cookie required>
 
 <label for="kansyu2">潜宙艦Lv</label>
-<input type="number" id="kansyu2" value="0" min="0" max="9999" step="1" data-auto-cookie required />
+<input type="number" id="kansyu2" value="0" min="0" max="9999" step="1" data-auto-cookie required>
 
 <label for="over2">銀河の英雄Lv</label>
-<input type="number" id="over2" value="9999" min="0" max="9999" step="1" data-auto-cookie required />
+<input type="number" id="over2" value="9999" min="0" max="9999" step="1" data-auto-cookie required>
 
 <label for="pcut2">敵艦実弾カット率</label>
-<input type="number" id="pcut2" value="0" min="0" max="100" step="0.1" data-auto-cookie required />
+<input type="number" id="pcut2" value="0" min="0" max="100" step="0.1" data-auto-cookie required>
 
 <label for="ecut2">敵艦Eカット率</label>
-<input type="number" id="ecut2" value="0" min="0" max="100" step="0.1" data-auto-cookie required />
+<input type="number" id="ecut2" value="0" min="0" max="100" step="0.1" data-auto-cookie required>
 
 <label for="mainloading">主砲射撃指揮能力+</label>
-<input type="number" id="mainloading" value="0" min="0" max="900" step="1" data-auto-cookie required />
+<input type="number" id="mainloading" value="0" min="0" max="900" step="1" data-auto-cookie required>
 
 <label for="subloading">副砲射撃指揮能力+</label>
-<input type="number" id="subloading" value="0" min="0" max="900" step="1" data-auto-cookie required />
+<input type="number" id="subloading" value="0" min="0" max="900" step="1" data-auto-cookie required>
 
 <label>その他</label>
 <fieldset>
-	<label><input type="checkbox" id="main2"      checked data-auto-cookie />主砲</label><br />
-	<label><input type="checkbox" id="sub2"       checked data-auto-cookie />副砲</label><br />
-	<label><input type="checkbox" id="barrage2"   checked data-auto-cookie />弾幕</label><br />
-	<label><input type="checkbox" id="every-dps2"         data-auto-cookie />各DPS表示</label><br />
-	<label><input type="checkbox" id="autolv2"            data-auto-cookie />自動Lv調整</label><br />
+	<label><input type="checkbox" id="main2"      checked data-auto-cookie>主砲</label><br>
+	<label><input type="checkbox" id="sub2"       checked data-auto-cookie>副砲</label><br>
+	<label><input type="checkbox" id="barrage2"   checked data-auto-cookie>弾幕</label><br>
+	<label><input type="checkbox" id="every-dps2"         data-auto-cookie>各DPS表示</label><br>
+	<label><input type="checkbox" id="autolv2"            data-auto-cookie>自動Lv調整</label><br>
 </fieldset>
 
 </form>

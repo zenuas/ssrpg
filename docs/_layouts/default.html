@@ -25,7 +25,7 @@
         <li class="buttons"><a class="box edit" href="{{ site.github.repository_url }}/edit/{{ site.github.source.branch }}/docs/{{ page.name }}" target="_blank">編集</a></li>
         <li class="buttons"><a class="box document" href="https://raw.githubusercontent.com/{{ site.github.repository_nwo }}/{{ site.github.source.branch }}/docs/{{ page.name }}" target="_blank">ソース</a></li>
         <li class="buttons"><a class="box history" href="https://github.com/{{ site.github.repository_nwo }}/commits/{{ site.github.source.branch }}/docs/{{ page.name }}" target="_blank">履歴</a></li>
-        <li><form action="search.html" target="_blank"><input type="text" name="q" placeholder="検索" required /><input type="submit" class="buttons box search" /></form></li>
+        <li><form action="search.html" target="_blank"><input type="text" name="q" placeholder="検索" required><input type="submit" class="buttons box search"></form></li>
       </ul>
     </header>
 
@@ -178,10 +178,10 @@
 
     <footer>
       <address>
-        Posted by <a href="{{ site.github.owner_url }}">@{{ site.github.owner_name }}</a>.<br />
+        Posted by <a href="{{ site.github.owner_url }}">@{{ site.github.owner_name }}</a>.<br>
       </address>
-      Posted at <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: "%Y/%m/%d %T" }}Z</time>.<br />
-      Licensed by {{ site.github.license.name }}.<br />
+      Posted at <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: "%Y/%m/%d %T" }}Z</time>.<br>
+      Licensed by {{ site.github.license.name }}.<br>
     </footer>
   </body>
 </html>
