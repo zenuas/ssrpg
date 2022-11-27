@@ -269,8 +269,9 @@ td
 	{
 		max-width: 95vw;
 		max-height: 75vh;
+		width: fit-content;
 		display: block;
-		overflow: scroll;
+		overflow: auto;
 	}
 }
 
