@@ -491,7 +491,7 @@ const kikan = () => {
 			const powerup    = Math.min(power * over, Math.ceil((lvup + jyuugekiup + status) * (1 + kansyu * 0.01)) + ace);
 			const damage     = power + (message == "威力固定兵器" ? 0 : powerup);
 			const result     = Math.min(9999999, Math.ceil(damage * (100 - (bullet > 0 ? pcut : ecut)) / 100));
-			const timep      = Math.max(0.1, time * (100 - autoloading) / 100);
+			const timep      = Math.max(0.1, time * (100 - autoloading) / 100) * (1 + jyuugeki / 80);
 			
 			if(bullet > 0)
 			{
