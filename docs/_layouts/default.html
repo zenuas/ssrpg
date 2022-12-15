@@ -31,7 +31,7 @@
 
     <div class="main-contents">
       <article>
-        {{ content }}
+        {% include anchor_headings.html html=content anchorBody="🔗" %}
       </article>
 
 {% if page.nonav %}

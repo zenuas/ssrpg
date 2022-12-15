@@ -12,3 +12,4 @@
 * [jsDelivr CDN](https://www.jsdelivr.com/)
 * [Text Fragments](https://wicg.github.io/scroll-to-text-fragment/)
 * [Chart.js](https://www.chartjs.org/)
+* [jekyll-anchor-headings](https://github.com/allejo/jekyll-anchor-headings)
