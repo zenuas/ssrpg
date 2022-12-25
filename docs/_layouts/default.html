@@ -2,8 +2,11 @@
 <html lang="{{ site.lang | default: "ja-jp" }}">
   <head>
     <meta charset="utf-8">
-
-{% seo %}
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="keywords" content="{{ page.keywords | default: site.keywords }}">
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="author" content="{{ page.author | default: site.author }}">
+    <meta name="generator" content="Jekyll v{{ jekyll.version }}">
     <link rel="stylesheet" href="{{ '/assets/styles.css?v=' | append: site.github.build_revision | relative_url }}">
     <script type="module" src="{{ '/assets/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
     {% for scr in page.scripts %}
