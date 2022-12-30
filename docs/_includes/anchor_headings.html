@@ -58,7 +58,7 @@
   {% assign maxHeader = include.h_max | default: 6 %}
   {% assign beforeHeading = include.beforeHeading %}
   {% assign headerAttrs = include.headerAttrs %}
-  {% assign nodes = include.html | split: '<h' %}
+  {% assign nodes = include.html | replace: '<br />', '<br>' | split: '<h' %}
 
   {% capture edited_headings %}{% endcapture %}
 
@@ -114,6 +114,10 @@
       {% endif %}
       {% capture headerAttrs %}{{ headerAttrs }} id="%html_id%"{% endcapture %}
     {% endif %}
+
+    <!-- HTML5 id generate -->
+    {% capture html_id %}{{ _workspace[0] | split: '>' | last | replace: ' ', '' }}{% endcapture %}
+    {% capture _hAttrToStrip %}{{ _workspace[0] | split: ' ' | first }} id="{{ html_id }}">{% endcapture %}
 
     <!-- Build the anchor to inject for our heading -->
     {% capture anchor %}{% endcapture %}
