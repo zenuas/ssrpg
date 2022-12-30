@@ -7,3 +7,5 @@ google_analytics: G-63FZDQEHJ8
 markdown: kramdown
 kramdown:
   hard_wrap: true
+plugins:
+  - jekyll-sitemap
