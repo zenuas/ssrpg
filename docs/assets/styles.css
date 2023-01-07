@@ -160,6 +160,15 @@ img
 	border: 1px solid #CCCCCC;
 }
 
+@media only screen and (min-width: 1025px)
+{
+	img
+	{
+		max-width: calc(90vw - 15.0rem);
+		object-fit: scale-down;
+	}
+}
+
 @media only screen and (max-width: 1024px)
 {
 	img
