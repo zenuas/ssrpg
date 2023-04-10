@@ -9,7 +9,27 @@ window.addEventListener("load", () => {
 	document.querySelectorAll(".enemies-list").forEach(list => {
 		list.classList.add("commands");
 		const table = list.nextSibling.nextSibling;
-		const isbattle = list.classList.contains("rank-battle");
+		const area_name = document.querySelector("h2:first-child").firstChild.textContent.trim();
+		const is_battle = area_name == "宇宙闘技場";
+		const is_solar_systems = [
+			"月",
+			"火星",
+			"アステロイドベルト",
+			"木星",
+			"土星",
+			"天王星",
+			"海王星",
+			"冥王星",
+			"帝国軍太陽系要塞",
+			"帝国軍移民船団"
+		].includes(area_name);
+		const is_onepunch = [
+			"射爆場",
+			"主砲射爆場",
+			"試剣場",
+			"弾幕射爆場"
+		].includes(area_name);
+		
 		Table.col_visible(table, false, [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,28, 29, 30, 31]);
 		
 		const parts = [
@@ -23,7 +43,7 @@ window.addEventListener("load", () => {
 		const calculation_list = Dom.create("ul", {className: "calculation-list commands none"});
 		list.parentNode.insertBefore(parts_list, list.nextElementSibling);
 		
-		if(!isbattle)
+		if(!is_battle && !is_onepunch)
 		{
 			parts_list.parentNode.insertBefore(level_list,       parts_list.nextElementSibling);
 			level_list.parentNode.insertBefore(calculation_list, level_list.nextElementSibling);
@@ -84,20 +104,6 @@ window.addEventListener("load", () => {
 			})
 			.forEach(x => list.appendChild(x));
 		
-		const area_name = document.querySelector("h2:first-child").textContent;
-		const is_solar_systems = [
-			"月",
-			"火星",
-			"アステロイドベルト",
-			"木星",
-			"土星",
-			"天王星",
-			"海王星",
-			"冥王星",
-			"帝国軍太陽系要塞",
-			"帝国軍移民船団"
-		].includes(area_name);
-		
 		const levels = [
 			{name: "一般兵", pushed: true,  min:    0, max:    0, boss:    0},
 			{name: "熟練兵", pushed: false, min:    1, max:   10, boss:   11},
@@ -137,9 +143,9 @@ window.addEventListener("load", () => {
 				if(isNaN(value)) return;
 				
 				const stage = td.parentNode.children[32 - 1].textContent;
-				const boss  = isbattle ? true : stage.indexOf("ボス") >= 0;
-				const rank  = isbattle ? parseInt(stage.match(/ランク(\d+～)?(\d+)/)[2]) : 0;
-				const lv    = isbattle ? rank_to_lv(rank) : calc.func(level.min, level.max, boss ? level.boss : level.max);
+				const boss  = is_battle ? true : stage.indexOf("ボス") >= 0;
+				const rank  = is_battle ? parseInt(stage.match(/ランク(\d+～)?(\d+)/)[2]) : 0;
+				const lv    = is_battle ? rank_to_lv(rank) : calc.func(level.min, level.max, boss ? level.boss : level.max);
 				if(td_index <= 12)
 				{
 					const weapon     = td.parentNode.children[td_index == 4 ? 1 : td_index == 8 ? 2 : 3].textContent;
