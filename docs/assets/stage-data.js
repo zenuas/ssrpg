@@ -531,4 +531,25 @@ export const stage_datas = {
 		{emax: 50, est: 3.1, esp: 5, dist: 50, bmo: 1200, bex: 1200, bpo: 75, zmo: 3250, zex: 3250, zpo: 82, znm: 8},
 		{emax: 50, est: 3, esp: 3, dist: 50, bmo: 4500, bex: 4500, bpo: 3200, zmo: 4450, zex: 4450, zpo: 157, znm: 9},
 	],
+	"泡立つ宇宙": [
+		{emax: 130, est: 3.5, esp: 6, dist: 60, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 135, est: 3.5, esp: 6, dist: 60, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 60, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 60, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 60, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+	],
+	"スターチャイルド": [
+		{emax: 130, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 135, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+	],
+	"シュバルツシルト境界面": [
+		{emax: 130, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 135, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+		{emax: 140, est: 3.5, esp: 6, dist: 80, bmo: 0, bex: 0, bpo: 0, zmo: 0, zex: 0, zpo: 0, znm: 0},
+	],
 };
