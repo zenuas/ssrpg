@@ -21767,6 +21767,7 @@ null,
                 line: { borderWidth: 1 },
                 point: { radius: 0 },
             },
+            plugins: { zoom: { zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }}},
         },
     };
     const chart = new Chart(
