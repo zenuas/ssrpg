@@ -2074,8 +2074,8 @@ const data = {
         },
         {
             label: 'cestlavie',
-            backgroundColor: 'rgb(220, 55, 55)',
-            borderColor: 'rgb(220, 55, 55)',
+            backgroundColor: 'rgb(218, 81, 31)',
+            borderColor: 'rgb(218, 81, 31)',
             data: [
 null,
 null,
@@ -3110,8 +3110,8 @@ null,
         },
         {
             label: 'KANEKANE',
-            backgroundColor: 'rgb(218, 81, 31)',
-            borderColor: 'rgb(218, 81, 31)',
+            backgroundColor: 'rgb(204, 129, 6)',
+            borderColor: 'rgb(204, 129, 6)',
             data: [
 49896384,
 49896384,
@@ -4146,8 +4146,8 @@ null,
         },
         {
             label: 'アルトX',
-            backgroundColor: 'rgb(217, 103, 10)',
-            borderColor: 'rgb(217, 103, 10)',
+            backgroundColor: 'rgb(184, 175, 0)',
+            borderColor: 'rgb(184, 175, 0)',
             data: [
 88622417,
 88670699,
@@ -5182,8 +5182,8 @@ null,
         },
         {
             label: '防空司令志願者',
-            backgroundColor: 'rgb(204, 129, 6)',
-            borderColor: 'rgb(204, 129, 6)',
+            backgroundColor: 'rgb(84, 181, 19)',
+            borderColor: 'rgb(84, 181, 19)',
             data: [
 19109244,
 19123036,
@@ -6218,8 +6218,8 @@ null,
         },
         {
             label: '鬼神',
-            backgroundColor: 'rgb(200, 163, 0)',
-            borderColor: 'rgb(200, 163, 0)',
+            backgroundColor: 'rgb(7, 171, 86)',
+            borderColor: 'rgb(7, 171, 86)',
             data: [
 133726521,
 135409543,
@@ -7254,8 +7254,8 @@ null,
         },
         {
             label: '壊れかけの便座',
-            backgroundColor: 'rgb(184, 175, 0)',
-            borderColor: 'rgb(184, 175, 0)',
+            backgroundColor: 'rgb(0, 159, 176)',
+            borderColor: 'rgb(0, 159, 176)',
             data: [
 51196504,
 51196504,
@@ -8290,8 +8290,8 @@ null,
         },
         {
             label: 'MTMT',
-            backgroundColor: 'rgb(146, 179, 0)',
-            borderColor: 'rgb(146, 179, 0)',
+            backgroundColor: 'rgb(51, 128, 245)',
+            borderColor: 'rgb(51, 128, 245)',
             data: [
 null,
 null,
@@ -9326,8 +9326,8 @@ null,
         },
         {
             label: '真理与空白',
-            backgroundColor: 'rgb(84, 181, 19)',
-            borderColor: 'rgb(84, 181, 19)',
+            backgroundColor: 'rgb(140, 83, 253)',
+            borderColor: 'rgb(140, 83, 253)',
             data: [
 null,
 null,
@@ -10362,8 +10362,8 @@ null,
         },
         {
             label: 'Azrael.',
-            backgroundColor: 'rgb(24, 174, 31)',
-            borderColor: 'rgb(24, 174, 31)',
+            backgroundColor: 'rgb(199, 59, 227)',
+            borderColor: 'rgb(199, 59, 227)',
             data: [
 null,
 null,
@@ -11398,8 +11398,9 @@ null,
         },
         {
             label: '石村',
-            backgroundColor: 'rgb(7, 171, 86)',
-            borderColor: 'rgb(7, 171, 86)',
+            backgroundColor: 'rgb(220, 55, 55)',
+            borderColor: 'rgb(220, 55, 55)',
+            hidden: true,
             data: [
 43711670,
 43711670,
@@ -12434,8 +12435,9 @@ null,
         },
         {
             label: 'wakab',
-            backgroundColor: 'rgb(0, 168, 133)',
-            borderColor: 'rgb(0, 168, 133)',
+            backgroundColor: 'rgb(217, 103, 10)',
+            borderColor: 'rgb(217, 103, 10)',
+            hidden: true,
             data: [
 28798132,
 28798132,
@@ -13470,8 +13472,9 @@ null,
         },
         {
             label: 'moyasi3966',
-            backgroundColor: 'rgb(0, 159, 176)',
-            borderColor: 'rgb(0, 159, 176)',
+            backgroundColor: 'rgb(200, 163, 0)',
+            borderColor: 'rgb(200, 163, 0)',
+            hidden: true,
             data: [
 null,
 null,
@@ -14506,8 +14509,9 @@ null,
         },
         {
             label: '白い死神',
-            backgroundColor: 'rgb(16, 149, 232)',
-            borderColor: 'rgb(16, 149, 232)',
+            backgroundColor: 'rgb(146, 179, 0)',
+            borderColor: 'rgb(146, 179, 0)',
+            hidden: true,
             data: [
 null,
 null,
@@ -15542,8 +15546,9 @@ null,
         },
         {
             label: 'Pokopem2',
-            backgroundColor: 'rgb(51, 128, 245)',
-            borderColor: 'rgb(51, 128, 245)',
+            backgroundColor: 'rgb(24, 174, 31)',
+            borderColor: 'rgb(24, 174, 31)',
+            hidden: true,
             data: [
 18783341,
 18783341,
@@ -16578,8 +16583,9 @@ null,
         },
         {
             label: 'dokizukin',
-            backgroundColor: 'rgb(100, 100, 255)',
-            borderColor: 'rgb(100, 100, 255)',
+            backgroundColor: 'rgb(0, 168, 133)',
+            borderColor: 'rgb(0, 168, 133)',
+            hidden: true,
             data: [
 null,
 null,
@@ -17614,8 +17620,9 @@ null,
         },
         {
             label: 'ちゃら2',
-            backgroundColor: 'rgb(140, 83, 253)',
-            borderColor: 'rgb(140, 83, 253)',
+            backgroundColor: 'rgb(16, 149, 232)',
+            borderColor: 'rgb(16, 149, 232)',
+            hidden: true,
             data: [
 119557741,
 119557741,
@@ -18650,8 +18657,9 @@ null,
         },
         {
             label: 'ZUKI',
-            backgroundColor: 'rgb(166, 76, 248)',
-            borderColor: 'rgb(166, 76, 248)',
+            backgroundColor: 'rgb(100, 100, 255)',
+            borderColor: 'rgb(100, 100, 255)',
+            hidden: true,
             data: [
 34322231,
 34322231,
@@ -19686,8 +19694,9 @@ null,
         },
         {
             label: 'ブライト369',
-            backgroundColor: 'rgb(199, 59, 227)',
-            borderColor: 'rgb(199, 59, 227)',
+            backgroundColor: 'rgb(166, 76, 248)',
+            borderColor: 'rgb(166, 76, 248)',
+            hidden: true,
             data: [
 null,
 null,
@@ -20724,6 +20733,7 @@ null,
             label: 'グラハムY',
             backgroundColor: 'rgb(209, 57, 185)',
             borderColor: 'rgb(209, 57, 185)',
+            hidden: true,
             data: [
 null,
 null,
@@ -21767,11 +21777,13 @@ null,
                 line: { borderWidth: 1 },
                 point: { radius: 0 },
             },
-            plugins: { zoom: { zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'xy' }}},
+            plugins: { zoom: { zoom: { drag: { enabled: true }, pinch: { enabled: true }, mode: 'x' }}},
         },
     };
-    const chart = new Chart(
-        document.getElementById('enemy-defeat'),
-        config
-    );
+    const canvas = document.getElementById('enemy-defeat');
+    const chart = new Chart(canvas, config);
+    const reset = document.createElement('a');
+    reset.textContent = 'Reset Zoom';
+    reset.onclick = () => { chart.resetZoom(); };
+    canvas.after(reset);
 });
