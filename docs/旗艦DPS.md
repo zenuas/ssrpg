@@ -58,6 +58,18 @@ E兵器で消費Eがバリア回復を超える場合は`与ダメージ * 発�
 <label for="barrierregene">バリア回復</label>
 <input type="number" id="barrierregene" value="9999" min="1" max="99999" step="1" data-auto-cookie required>
 
+<label for="limit">限定</label>
+<select id="limit" data-auto-cookie required>
+	<option value="">なし</option>
+	<option value="sword">ソード限定</option>
+	<option value="anti-aircraft">対空機銃限定</option>
+	<option value="gatling_or_machine-gun">ガトリング、機銃限定</option>
+	<option value="light-fist">光拳限定</option>
+	<option value="heat">熱量あり限定</option>
+	<option value="electro">電磁力あり限定</option>
+	<option value="explosion">爆発力あり限定</option>
+</select>
+
 <label>その他</label>
 <fieldset>
 	<label><input type="checkbox" id="pweapon"     checked data-auto-cookie>実弾兵器</label><br>
@@ -452,6 +464,7 @@ const stepover100 = (lv) => {
 	var b = lv % 100;
 	return((a + 1) * (50 * a + b + 1) - 1);
 };
+const weapons = {};
 const kikan = () => {
 	const lv            = parseInt(document.getElementById("lv").value);
 	const status        = stepover100(parseInt(document.getElementById("status").value));
@@ -469,6 +482,7 @@ const kikan = () => {
 	const energy2       = parseInt(document.getElementById("energy2").value);
 	const barrier       = parseInt(document.getElementById("barrier").value);
 	const barrierregene = parseInt(document.getElementById("barrierregene").value);
+	const limit         = document.getElementById("limit").value;
 	const pweapon       = document.getElementById("pweapon").checked;
 	const eweapon       = document.getElementById("eweapon").checked;
 	const main          = document.getElementById("main").checked;
@@ -480,15 +494,20 @@ const kikan = () => {
 	const autolv        = document.getElementById("autolv").checked;
 	
 	document.querySelectorAll("table tbody tr").forEach(tr => {
-		const type    = tr.children[0];
-		const message = tr.children[2].textContent;
-		const power   = parseInt(tr.children[3].textContent);
-		const time    = parseFloat(tr.children[4].textContent);
-		const shotnum = parseInt(tr.children[5].textContent);
-		const bullet  = parseInt(tr.children[6].textContent);
-		const energy  = tr.children[7];
-		const autolvc = tr.children[8];
-		const dps     = tr.children[9];
+		const type      = tr.children[0];
+		const name      = tr.children[1].textContent;
+		const wtype     = weapons[name].wtype;
+		const heat      = parseInt(weapons[name].heat);
+		const electro   = parseInt(weapons[name].electro);
+		const explosion = parseInt(weapons[name].explosion);
+		const message   = tr.children[2].textContent;
+		const power     = parseInt(tr.children[3].textContent);
+		const time      = parseFloat(tr.children[4].textContent);
+		const shotnum   = parseInt(tr.children[5].textContent);
+		const bullet    = parseInt(tr.children[6].textContent);
+		const energy    = tr.children[7];
+		const autolvc   = tr.children[8];
+		const dps       = tr.children[9];
 		
 		const calc = (lv_) => {
 			const lvup       = Math.ceil(power * 0.02 * lv_);
@@ -632,7 +651,22 @@ const kikan = () => {
 		Dom.removeChildAll(type);
 		type.appendChild(type_a);
 		
-		tr.classList.toggle("none", !(((bullet > 0 && pweapon) || (bullet == 0 && eweapon)) && ((type_v == "主砲" && main) || (type_v == "副砲" && sub) || (type_v == "弾幕" && barrage))));
+		tr.classList.toggle("none", !(
+				(
+					(bullet > 0 && pweapon) || (bullet == 0 && eweapon)
+				) && (
+					(type_v == "主砲" && main) || (type_v == "副砲" && sub) || (type_v == "弾幕" && barrage)
+				) && (
+					(limit == "") ||
+					(limit == "sword"                  && wtype == "ソード") ||
+					(limit == "anti-aircraft"          && wtype == "対空機銃") ||
+					(limit == "gatling_or_machine-gun" && (wtype == "ガトリング砲" || wtype == "対空機銃")) ||
+					(limit == "light-fist"             && wtype == "光拳") ||
+					(limit == "heat"                   && heat > 0) ||
+					(limit == "electro"                && electro > 0) ||
+					(limit == "explosion"              && explosion > 0)
+				)
+			));
 	});
 	
 	document.querySelectorAll(
@@ -649,14 +683,29 @@ const kikan = () => {
 	document.querySelectorAll("table thead tr th:nth-child(9), table tbody tr td:nth-child(9)").forEach(x => x.classList.toggle("none", !autolv));
 	document.querySelector("table").dispatchEvent(new Event("update"));
 };
-document.querySelectorAll("table tbody tr td:nth-child(8)").forEach(td => td.dataset.energy = td.textContent);
-document.querySelectorAll("table tbody tr td:nth-child(2)").forEach(td => {
-	const name_v = td.textContent;
-	const name_a = Dom.create("a", {target: "_blank", href: "%E6%AD%A6%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
-	Dom.removeChildAll(td);
-	td.appendChild(name_a);
+
+window.addEventListener("load", async () => {
+	(await (await fetch("https://raw.githubusercontent.com/zenuas/ssrpg/master/docs/%E6%AD%A6%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF.md")).text())
+		.split(/\r\n?|\n/)
+		.filter(s => s.startsWith("|"))
+		.forEach(s => {
+			const xs = s.split("|").map(v => v.trim()).splice(1);
+			weapons[xs[3]] = {
+				wtype:     xs[2],
+				heat:      xs[18],
+				electro:   xs[19],
+				explosion: xs[13]
+			};
+		});
+	document.querySelectorAll("table tbody tr td:nth-child(8)").forEach(td => td.dataset.energy = td.textContent);
+	document.querySelectorAll("table tbody tr td:nth-child(2)").forEach(td => {
+		const name_v = td.textContent;
+		const name_a = Dom.create("a", {target: "_blank", href: "%E6%AD%A6%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF.html?q=" + encodeURI(name_v)}, name_v);
+		Dom.removeChildAll(td);
+		td.appendChild(name_a);
+	});
+	kikan();
 });
-kikan();
 
 window.kikan = kikan;
 </script>
