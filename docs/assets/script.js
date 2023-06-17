@@ -6,9 +6,7 @@ import * as Dom       from "./dom.js";
 import * as Table     from "./table.js";
 
 window.addEventListener("load", () => {
-	document.querySelectorAll(".enemies-list").forEach(list => {
-		list.classList.add("commands");
-		const table = list.nextSibling.nextSibling;
+	document.querySelectorAll("#enemies-list").forEach(table => {
 		const area_name = document.querySelector("h2:first-child").firstChild.textContent.trim();
 		const is_battle = area_name == "宇宙闘技場";
 		const is_solar_systems = [
@@ -38,10 +36,12 @@ window.addEventListener("load", () => {
 			{name: "弾幕", pushed: true}
 		];
 		
+		const commands_list    = Dom.create("ul", {className: "commands-list commands"});
 		const parts_list       = Dom.create("ul", {className: "parts-list commands none"});
 		const level_list       = Dom.create("ul", {className: "level-list commands none"});
 		const calculation_list = Dom.create("ul", {className: "calculation-list commands none"});
-		list.parentNode.insertBefore(parts_list, list.nextElementSibling);
+		table.parentNode.insertBefore(commands_list, table);
+		commands_list.parentNode.insertBefore(parts_list, commands_list.nextElementSibling);
 		
 		if(!is_battle && !is_onepunch)
 		{
@@ -102,7 +102,7 @@ window.addEventListener("load", () => {
 				};
 				return li;
 			})
-			.forEach(x => list.appendChild(x));
+			.forEach(x => commands_list.appendChild(x));
 		
 		const levels = [
 			{name: "一般兵", pushed: true,  min:    0, max:    0, boss:    0},
