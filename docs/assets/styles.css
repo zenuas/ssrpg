@@ -153,6 +153,11 @@ hr
 	display: none !important;
 }
 
+.nowrap
+{
+	white-space: nowrap !important;
+}
+
 /* Images */
 
 img
