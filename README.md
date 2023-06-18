@@ -12,4 +12,6 @@
 * [jsDelivr CDN](https://www.jsdelivr.com/)
 * [Text Fragments](https://wicg.github.io/scroll-to-text-fragment/)
 * [Chart.js](https://www.chartjs.org/)
+* [chartjs-plugin-zoom](https://github.com/chartjs/chartjs-plugin-zoom)
+* [hammer.js](https://github.com/hammerjs/hammer.js)
 * [jekyll-anchor-headings](https://github.com/allejo/jekyll-anchor-headings)
