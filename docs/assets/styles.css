@@ -158,6 +158,11 @@ hr
 	white-space: nowrap !important;
 }
 
+.th-wrap th
+{
+	white-space: wrap !important;
+}
+
 /* Images */
 
 img
