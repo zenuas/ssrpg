@@ -56,9 +56,11 @@ window.addEventListener("load", () => {
 		const level_list       = Dom.create("ul", {className: "level-list commands none"});
 		const calculation_list = Dom.create("ul", {className: "calculation-list commands none"});
 		const defence_list     = Dom.create("ul", {className: "defence-list commands none"});
+		const dps_list         = Dom.create("ul", {className: "dps-list commands none"});
 		table.parentNode.insertBefore(commands_list, table);
 		commands_list.parentNode.insertBefore(parts_list, commands_list.nextElementSibling);
 		parts_list.parentNode.insertBefore(defence_list, parts_list.nextElementSibling);
+		defence_list.parentNode.insertBefore(dps_list, defence_list.nextElementSibling);
 		
 		if(!is_battle && !is_onepunch)
 		{
@@ -84,6 +86,7 @@ window.addEventListener("load", () => {
 			level_list.classList.toggle("none", hidden);
 			calculation_list.classList.toggle("none", hidden);
 			defence_list.classList.toggle("none", damege);
+			dps_list.classList.toggle("none", damege);
 		};
 		
 		const opts = [
@@ -158,6 +161,17 @@ window.addEventListener("load", () => {
 			{name: "旗艦防御MAX",  pushed: false, num: 1999600}
 		];
 		
+		const dps = [
+			{name: "単発威力", pushed: true,  num: 0},
+			{name: "DPS",      pushed: false, num: 1},
+			{name: "DPS*30",   pushed: false, num: 30}
+		];
+		
+		const evasion = [
+			{name: "回避0", pushed: true,  num: 0},
+			{name: "90",    pushed: false, num: 90}
+		];
+		
 		const rank_to_lv = (rank) => {
 			if(rank <=  48) return(0);
 			if(rank <=  98) return(Math.min(2000,  rank -  48));
@@ -175,6 +189,8 @@ window.addEventListener("load", () => {
 			const calc    = calculations.filter(x => x.pushed)[0];
 			const defship = defensive_ship.filter(x => x.pushed)[0].num;
 			const def     = defence.filter(x => x.pushed)[0].num;
+			const dpstype = dps.filter(x => x.pushed)[0].num;
+			const eva     = evasion.filter(x => x.pushed)[0].num;
 			
 			table.querySelectorAll(change_cols).forEach(td => {
 				const td_index = Array.prototype.indexOf.call(td.parentNode.children, td);
@@ -188,11 +204,18 @@ window.addEventListener("load", () => {
 				if(td_index <= 12)
 				{
 					const weapon     = td.parentNode.children[td_index == 4 ? 1 : td_index == 8 ? 2 : 3].textContent;
+					const loading    = parseFloat(td.parentNode.children[td_index + 1].textContent);
+					const firing     = parseInt(td.parentNode.children[td_index + 2].textContent);
 					const power_plus = weapon.indexOf("Lv補正") >= 0 ? lv : weapon.indexOf("Lv*5補正") >= 0 ? lv * 5 : rank >= 300 ? rank : 0;
 					const fixation   = weapon.indexOf("光拳：") >= 0 || weapon.indexOf("メタルソード") >= 0 || weapon.indexOf("ナインテイル") >= 0;
+					const hit        = weapon.match(/命中\+(\d+)%/);
+					const hitrate    = hit ? parseInt(hit[1]) : 0;
 					const defshipv   = fixation ? 0 : defship;
 					const defv       = fixation ? 0 : def;
-					td.textContent = (value == 0 ? 0 : Math.max(1, Math.ceil((value + Math.ceil(value * lv / 2)) * (10 - defshipv) / 10) + power_plus - defv)).toLocaleString();
+					const options    = eva == 0 && dpstype == 0 ? undefined : {minimumFractionDigits: 2, maximumFractionDigits: 2};
+					const damage     = value == 0 ? 0 : Math.max(1, Math.ceil((value + Math.ceil(value * lv / 2)) * (10 - defshipv) / 10) + power_plus - defv);
+					const nps        = dpstype == 0 || isNaN(loading) || isNaN(firing) ? 1 : 1 / loading * firing * dpstype;
+					td.textContent = (damage * nps * Math.max(0, Math.min(100, 100 - eva + hitrate)) / 100).toLocaleString(undefined, options);
 				}
 				else
 				{
@@ -204,14 +227,14 @@ window.addEventListener("load", () => {
 		power_update();
 		
 		parts
-			.map(part => {
-				const a  = Dom.create("a",  {href: "javascript:void(0)", className: "box"}, part.name);
-				const li = Dom.create("li", {className: "buttons" + (part.pushed ? " pushed" : "")});
+			.map((elment) => {
+				const a  = Dom.create("a",  {href: "javascript:void(0)", className: "box"}, elment.name);
+				const li = Dom.create("li", {className: "buttons" + (elment.pushed ? " pushed" : "")});
 				li.appendChild(a);
-				part.li = li;
+				elment.li = li;
 				a.onclick = () => {
-					part.pushed = !part.pushed;
-					part.li.classList.toggle("pushed", part.pushed);
+					elment.pushed = !elment.pushed;
+					elment.li.classList.toggle("pushed", elment.pushed);
 					opts_update();
 				};
 				return li;
@@ -219,15 +242,15 @@ window.addEventListener("load", () => {
 			.forEach(x => parts_list.appendChild(x));
 		
 		levels
-			.map(level => {
-				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, level.name);
-				const li = Dom.create("li", {className: "buttons" + (level.pushed ? " pushed" : "")});
+			.map((elment) => {
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, elment.name);
+				const li = Dom.create("li", {className: "buttons" + (elment.pushed ? " pushed" : "")});
 				li.appendChild(a);
-				level.li = li;
+				elment.li = li;
 				a.onclick = () => {
 					levels.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
-					level.pushed = true;
-					level.li.classList.add("pushed");
+					elment.pushed = true;
+					elment.li.classList.add("pushed");
 					power_update();
 				};
 				return li;
@@ -235,18 +258,18 @@ window.addEventListener("load", () => {
 			.forEach(x => level_list.appendChild(x));
 		
 		calculations
-			.map((calc) => {
-				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, calc.name);
-				const li = Dom.create("li", {className: "buttons" + (calc.pushed ? " pushed" : "")});
+			.map((elment) => {
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, elment.name);
+				const li = Dom.create("li", {className: "buttons" + (elment.pushed ? " pushed" : "")});
 				li.appendChild(a);
-				calc.li = li;
+				elment.li = li;
 				a.onclick = () => {
 					calculations.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
-					calc.pushed = true;
-					calc.li.classList.add("pushed");
+					elment.pushed = true;
+					elment.li.classList.add("pushed");
 					power_update();
 				};
-				if(calc.boss && is_solar_systems) li.classList.add("none");
+				if(elment.boss && is_solar_systems) li.classList.add("none");
 				return li;
 			})
 			.forEach(x => calculation_list.appendChild(x));
@@ -254,15 +277,15 @@ window.addEventListener("load", () => {
 		if(!is_not_defensive_ship)
 		{
 			defensive_ship
-				.map((def) => {
-					const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, def.name);
-					const li = Dom.create("li", {className: "buttons" + (def.pushed ? " pushed" : "")});
+				.map((elment) => {
+					const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, elment.name);
+					const li = Dom.create("li", {className: "buttons" + (elment.pushed ? " pushed" : "")});
 					li.appendChild(a);
-					def.li = li;
+					elment.li = li;
 					a.onclick = () => {
 						defensive_ship.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
-						def.pushed = true;
-						def.li.classList.add("pushed");
+						elment.pushed = true;
+						elment.li.classList.add("pushed");
 						power_update();
 					};
 					return li;
@@ -271,20 +294,52 @@ window.addEventListener("load", () => {
 		}
 		
 		defence
-			.map((def) => {
-				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, def.name);
-				const li = Dom.create("li", {className: "buttons" + (def.pushed ? " pushed" : "")});
+			.map((elment) => {
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, elment.name);
+				const li = Dom.create("li", {className: "buttons" + (elment.pushed ? " pushed" : "")});
 				li.appendChild(a);
-				def.li = li;
+				elment.li = li;
 				a.onclick = () => {
 					defence.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
-					def.pushed = true;
-					def.li.classList.add("pushed");
+					elment.pushed = true;
+					elment.li.classList.add("pushed");
 					power_update();
 				};
 				return li;
 			})
 			.forEach(x => defence_list.appendChild(x));
+		
+		dps
+			.map((elment) => {
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, elment.name);
+				const li = Dom.create("li", {className: "buttons" + (elment.pushed ? " pushed" : "")});
+				li.appendChild(a);
+				elment.li = li;
+				a.onclick = () => {
+					dps.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
+					elment.pushed = true;
+					elment.li.classList.add("pushed");
+					power_update();
+				};
+				return li;
+			})
+			.forEach(x => dps_list.appendChild(x));
+		
+		evasion
+			.map((elment) => {
+				const a  = Dom.create("a", {href: "javascript:void(0)", className: "box"}, elment.name);
+				const li = Dom.create("li", {className: "buttons" + (elment.pushed ? " pushed" : "")});
+				li.appendChild(a);
+				elment.li = li;
+				a.onclick = () => {
+					evasion.forEach(x => {x.pushed = false; x.li.classList.remove("pushed");});
+					elment.pushed = true;
+					elment.li.classList.add("pushed");
+					power_update();
+				};
+				return li;
+			})
+			.forEach(x => dps_list.appendChild(x));
 		
 		table.querySelectorAll("tbody tr td:nth-child(1)").forEach(td => {
 			const name_v = td.textContent;
