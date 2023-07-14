@@ -169,6 +169,14 @@ window.addEventListener("load", () => {
 		
 		const evasion = [
 			{name: "回避0", pushed: true,  num: 0},
+			{name: "10",    pushed: false, num: 10},
+			{name: "20",    pushed: false, num: 20},
+			{name: "30",    pushed: false, num: 30},
+			{name: "40",    pushed: false, num: 40},
+			{name: "50",    pushed: false, num: 50},
+			{name: "60",    pushed: false, num: 60},
+			{name: "70",    pushed: false, num: 70},
+			{name: "80",    pushed: false, num: 80},
 			{name: "90",    pushed: false, num: 90}
 		];
 		
