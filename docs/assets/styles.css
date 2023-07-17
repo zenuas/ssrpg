@@ -194,6 +194,7 @@ code, pre
 {
 	background-color: #333837;
 	color: #B9B4A9;
+	tab-size: 4;
 }
 
 pre
@@ -562,4 +563,22 @@ iframe[title="YouTube video player"]
 	width: 560px;
 	height: auto;
 	aspect-ratio: 16 / 9;
+}
+
+/* Rouge syntax highlighter */
+
+.highlighter-rouge .k
+{
+	color: #2222EE;
+}
+
+.highlighter-rouge .m
+{
+	color: #EE2222;
+}
+
+.highlighter-rouge .c1,
+.highlighter-rouge .cm
+{
+	color: #228822;
 }
