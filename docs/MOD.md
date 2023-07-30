@@ -84,7 +84,7 @@ Poolを使用しないだけで、わずかに改善が見られる。
 
 誘導力を持つ弾も処理落ちの要因となる。
 ホーミング処理はShot1.MoveXであるが前述までに比べると比較的一般的なものである。
-ゲーム性に影響がでるが毎フレーム行っているこの処理を数フレームに1回にし、ホーミング方向を強くするなどで改善は可能である。
+ゲーム性に影響がでるが毎フレーム行っているこの処理を数フレームに1回にし、ホーミング方向を強くするなどで改善可能である。
 
 ### 10000撃破称号取得不能バグ修正
 
@@ -111,7 +111,7 @@ else if (this.DOS.clear_defeat_num >= 10000)
 StageCotrolScriptのbonus_metal_outの配列サイズを拡張し、StageCotrolScript.AddPointにてenemy_noが208撃破時にフラグを立て、
 StageCotrolScript.Updateにてふさわしいメタル倍率を設定すればよい。
 
-bonus_resource_flagフラグを設定し、StageClearScriptにて幻・メタル資源入手を表示できれるのが望ましい。
+bonus_resource_flagフラグを設定し、StageClearScriptにて幻・メタル資源入手を表示するのが望ましい。
 
 ### ドロップ数調整
 
