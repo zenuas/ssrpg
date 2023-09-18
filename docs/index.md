@@ -2,13 +2,19 @@
 
 スマホゲームの宇宙戦艦物語RPGの攻略情報メモです。
 
+本サイトのリポジトリは2023年9月19日を持ってアーカイブ化します。
+以降、メンテナンスすることはありません。
+追加・修正が必要な場合はフォークして下さい。
+
 ### 変更履歴
+
+[コミットログ](https://github.com/zenuas/ssrpg/commits/)
 
 <div id="commits"></div>
 
 
 <script type="module">
-
+/*
 window.addEventListener("load", async () => {
 	const commits = document.getElementById("commits");
 	
@@ -58,4 +64,5 @@ window.addEventListener("load", async () => {
 	(await Promise.all(promises))
 		.forEach(x => commits.appendChild(x));
 });
+*/
 </script>
