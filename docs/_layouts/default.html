@@ -8,6 +8,7 @@
     <meta name="author" content="{{ page.author | default: site.author }}">
     <meta name="generator" content="Jekyll v{{ jekyll.version }}">
     <link rel="stylesheet" href="{{ '/assets/styles.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="canonical" href="{{ page.url | replace_first: '/', '' | url_encode | absolute_url }}">
     <script type="module" src="{{ '/assets/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
     {% for scr in page.scripts %}
     {% if scr contains 'https://' %}
