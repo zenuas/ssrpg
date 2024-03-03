@@ -26,6 +26,9 @@
 <label for="ecut2">敵艦Eカット率</label>
 <input type="number" id="ecut2" value="0" min="0" max="100" step="0.1" data-auto-cookie required>
 
+<label for="tyuuwa2">エネルギー中和磁場Lv</label>
+<input type="number" id="tyuuwa2" value="0" min="0" max="900" step="1" data-auto-cookie required>
+
 <label for="mainloading">主砲射撃指揮能力+</label>
 <input type="number" id="mainloading" value="0" min="0" max="900" step="1" data-auto-cookie required>
 
@@ -242,6 +245,7 @@ const ryoukan = () => {
 	const over        = parseInt(document.getElementById("over2").value) + 10000;
 	const pcut        = parseFloat(document.getElementById("pcut2").value);
 	const ecut        = parseFloat(document.getElementById("ecut2").value);
+	const tyuuwa      = parseFloat(document.getElementById("tyuuwa2").value);
 	const mainloading = parseInt(document.getElementById("mainloading").value);
 	const subloading  = parseInt(document.getElementById("subloading").value);
 	const main        = document.getElementById("main2").checked;
@@ -254,7 +258,7 @@ const ryoukan = () => {
 		const lvup    = Math.ceil(weapon.power * 0.02 * lv_);
 		const powerup = Math.min(weapon.power * over, lvup + (weapon.type == "主砲" ? kansyu : 0) + status);
 		const damage  = weapon.power + (weapon.message == "威力固定兵器" ? 0 : powerup);
-		const result  = Math.min(9999999, Math.ceil(damage * (100 - (weapon.bullet > 0 ? pcut : ecut)) / 100));
+		const result  = Math.min(9999999, Math.ceil(damage * (100 - (weapon.bullet > 0 ? pcut : ecut * (1 - tyuuwa / 3000))) / 100));
 		const timep   = Math.max(0.1, weapon.time * (1000 - (weapon.type == "主砲" ? mainloading : weapon.type == "副砲" ? subloading : 0)) / 1000);
 		
 		const shotp   = weapon.shotnum / timep;

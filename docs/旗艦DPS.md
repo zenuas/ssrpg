@@ -34,6 +34,9 @@ E兵器で消費Eがバリア回復を超える場合は`与ダメージ * 発�
 <label for="ecut">敵艦Eカット率</label>
 <input type="number" id="ecut" value="0" min="0" max="100" step="0.1" data-auto-cookie required>
 
+<label for="tyuuwa">エネルギー中和磁場Lv</label>
+<input type="number" id="tyuuwa" value="0" min="0" max="900" step="1" data-auto-cookie required>
+
 <label for="autoloading">自動装填チップ</label>
 <input type="number" id="autoloading" value="99" min="0" max="99" step="1" data-auto-cookie required>
 
@@ -477,6 +480,7 @@ const kikan = () => {
 	const over          = parseInt(document.getElementById("over").value) + 10000;
 	const pcut          = parseFloat(document.getElementById("pcut").value);
 	const ecut          = parseFloat(document.getElementById("ecut").value);
+	const tyuuwa        = parseFloat(document.getElementById("tyuuwa").value);
 	const autoloading   = parseInt(document.getElementById("autoloading").value);
 	const mag1          = parseInt(document.getElementById("mag1").value);
 	const mag2          = parseInt(document.getElementById("mag2").value);
@@ -517,7 +521,7 @@ const kikan = () => {
 			const jyuugekiup = jyuugeki == 0 ? 0 : Math.ceil(power * (1 + jyuugeki / 80) * 3) - power;
 			const powerup    = Math.min(power * over, Math.ceil((lvup + jyuugekiup + status) * (1 + kansyu * 0.01)) + ace);
 			const damage     = power + (message == "威力固定兵器" ? 0 : powerup);
-			const result     = Math.min(9999999, Math.ceil(damage * (100 - (bullet > 0 ? pcut : ecut)) / 100));
+			const result     = Math.min(9999999, Math.ceil(damage * (100 - (bullet > 0 ? pcut : ecut * (1 - tyuuwa / 3000))) / 100));
 			const timep      = Math.max(0.1, time * (100 - autoloading) / 100) * (1 + jyuugeki / 80);
 			
 			if(bullet > 0)
